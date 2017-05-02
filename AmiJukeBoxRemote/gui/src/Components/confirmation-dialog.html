@@ -1,0 +1,26 @@
+
+<template>
+  <ai-dialog>
+    <ai-dialog-header>
+      <h2 style="font-size:14px;">Confirmation</h2>
+    </ai-dialog-header>
+      
+    <ai-dialog-body>
+          ${value}
+    </ai-dialog-body>
+
+    <ai-dialog-footer>
+      <button click.trigger="cancel()">Cancel</button>
+      <button click.trigger="ok()" class="btn-primary">Ok</button>
+    </ai-dialog-footer>
+  </ai-dialog>
+  
+  
+  <style>
+    ai-dialog-overlay.active {
+      background-color: black;
+      opacity: .5;
+  }
+  </style>
+
+</template>    
