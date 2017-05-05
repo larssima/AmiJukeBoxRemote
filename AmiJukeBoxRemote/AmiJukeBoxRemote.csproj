@@ -169,6 +169,8 @@
     <Content Include="gui\src\main.js" />
     <Content Include="gui\src\nav-bar.html" />
     <Content Include="gui\src\Resources\Images\jukecard-green-300x100.png" />
+    <Content Include="gui\src\Resources\Images\jukecard-lightgreen-300x100-v2.png" />
+    <Content Include="gui\src\Resources\Images\jukecard-lightgreen-300x100.png" />
     <Content Include="gui\src\Resources\Images\jukecard-orange-300x100.png" />
     <Content Include="gui\src\Services\mapidpsactivitiesservice.js" />
     <Content Include="gui\src\Views\import.html" />
