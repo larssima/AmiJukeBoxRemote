@@ -34,7 +34,7 @@ export class Welcome {
 
   cancel()
   {
-    this.mapJukeboxService.cancelRecord();
+    return this.mapJukeboxService.cancelRecord();
   }
 
   canDeactivate() {
