@@ -3,9 +3,13 @@ import {AppSettings} from '../infrastructure/app-settings';
 import {BaseRepo} from '../infrastructure/baserepo';
 
 @inject(AppSettings, BaseRepo)
-export class MapIdpsActivitiesService {
+export class MapJukeboxService {
     constructor(appSettings, baseRepo) {
         this.baseRepo = baseRepo;
+    }
+
+    cancelRecord(){
+        return this.baseRepo.get('amijukebox/cancel').then(data=> {return data;});
     }
 
     getAllRmIdpsActivities(){

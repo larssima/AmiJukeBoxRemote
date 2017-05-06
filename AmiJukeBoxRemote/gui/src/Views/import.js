@@ -1,19 +1,19 @@
 import { inject, bindable, customElement, containerless, ObserverLocator } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
-import { MapIdpsActivitiesService } from '../services/mapidpsactivitiesservice';
+import { MapJukeboxService } from '../services/mapjukeboxservice';
 import { DialogService } from 'aurelia-dialog';
 import { ConfirmDialog } from '../Components/confirmation-dialog';
 import * as toastr from 'toastr';
 
-@inject(MapIdpsActivitiesService, EventAggregator, DialogService, ConfirmDialog, ObserverLocator)
+@inject(MapJukeboxService, EventAggregator, DialogService, ConfirmDialog, ObserverLocator)
 
 @containerless()
 
 export class Welcome {
   heading = '';
 
-  constructor(mapIdpsActivitiesService, eventAggregator, dialogService, confirmDialog, observerLocator) {
-    this.mapIdpsActivitiesService = mapIdpsActivitiesService;
+  constructor(mapJukeboxService, eventAggregator, dialogService, confirmDialog, observerLocator) {
+    this.mapJukeboxService = mapJukeboxService;
     this.dialogService = dialogService;
     this.ea = eventAggregator;
     this.dateFrom = '';
@@ -30,6 +30,11 @@ export class Welcome {
   submit() {
     this.previousValue = this.fullName;
     alert(`Welcome, ${this.fullName}!`);
+  }
+
+  cancel()
+  {
+    this.mapJukeboxService.cancelRecord();
   }
 
   canDeactivate() {

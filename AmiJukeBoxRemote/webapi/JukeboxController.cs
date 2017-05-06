@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using AmiJukeBoxRemote.Mqtt;
 
 namespace AmiJukeboxRemote.webapi
 {
@@ -8,15 +9,17 @@ namespace AmiJukeboxRemote.webapi
     //    public string ActivityCode { get; set; }
     //}
 
-    [System.Web.Http.RoutePrefix("api/jukebox")]
+    [System.Web.Http.RoutePrefix("api/amijukebox")]
     public class JukeboxController : ApiController
     {
+        private readonly Mqtt _mqtt = new Mqtt();
 
         [Route("cancel")]
-        [System.Web.Http.HttpPost]
+        [System.Web.Http.HttpGet]
         public bool CancelRecordPlaying()
         {
-            return false; 
+            _mqtt.SendCancelToSubscriber();
+            return true;
         }
 
         //[Route("pickup")]

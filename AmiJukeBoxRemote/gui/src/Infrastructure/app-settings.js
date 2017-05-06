@@ -4,7 +4,7 @@ export class AppSettings {
     constructor() {
         if (window.location.hostname === 'localhost') {
             // Config for development
-            this.baseUrl = 'http://localhost/rmidpsimport/';
+            this.baseUrl = 'http://localhost/AmiJukeBoxRemote/';
         } else {
             // Config for test and prod
             this.baseUrl = '/';

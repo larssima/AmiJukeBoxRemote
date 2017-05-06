@@ -43,6 +43,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\M2Mqtt.4.3.0.0\lib\net45\M2Mqtt.Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -184,13 +188,20 @@
     <Content Include="gui\test\unit\setup.js" />
     <Content Include="gui\test\unit\users.spec.js" />
     <Content Include="gui\wallaby.js" />
-    <Content Include="Web.config" />
+    <Content Include="Resources\Images\jukecard-green-300x100.png" />
+    <Content Include="Resources\Images\jukecard-lightgreen-300x100-v2.png" />
+    <Content Include="Resources\Images\jukecard-lightgreen-300x100.png" />
+    <Content Include="Resources\Images\jukecard-orange-300x100.png" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mqtt\Mqtt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="webapi\JukeboxController.cs" />
   </ItemGroup>
