@@ -7,7 +7,7 @@ export class AppSettings {
             this.baseUrl = 'http://localhost/AmiJukeBoxRemote/';
         } else {
             // Config for test and prod
-            this.baseUrl = '/';
+            this.baseUrl = '/AmiJukeBoxRemote/';
         }
         this.api = this.baseUrl + 'api/';
     }
