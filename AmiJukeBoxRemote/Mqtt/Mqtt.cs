@@ -17,7 +17,7 @@ namespace AmiJukeBoxRemote.Mqtt
             string clientId = Guid.NewGuid().ToString();
             mqttClient.Connect(clientId);
             mqttClient.Publish("amiJukebox", Encoding.UTF8.GetBytes("cancel record"),
-                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,true);
+                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE,false);
         }
     }
 }
