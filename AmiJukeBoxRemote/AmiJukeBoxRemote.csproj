@@ -114,6 +114,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="gui\assets\images\jukecard-green-300x100.png" />
+    <Content Include="gui\assets\images\jukecard-lightgreen-300x100-v2.png" />
+    <Content Include="gui\assets\images\jukecard-lightgreen-300x100.png" />
+    <Content Include="gui\assets\images\jukecard-orange-300x100.png" />
     <Content Include="gui\build\args.js" />
     <Content Include="gui\build\babel-options.js" />
     <Content Include="gui\build\bundles.js" />
@@ -188,10 +192,6 @@
     <Content Include="gui\test\unit\setup.js" />
     <Content Include="gui\test\unit\users.spec.js" />
     <Content Include="gui\wallaby.js" />
-    <Content Include="Resources\Images\jukecard-green-300x100.png" />
-    <Content Include="Resources\Images\jukecard-lightgreen-300x100-v2.png" />
-    <Content Include="Resources\Images\jukecard-lightgreen-300x100.png" />
-    <Content Include="Resources\Images\jukecard-orange-300x100.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
