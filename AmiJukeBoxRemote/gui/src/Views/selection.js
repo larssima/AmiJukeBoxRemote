@@ -37,6 +37,11 @@ export class Welcome {
     return this.mapJukeboxService.cancelRecord();
   }
 
+  createstrips()
+  {
+    return this.mapJukeboxService.createStrips();
+  }
+
   canDeactivate() {
     /*
     if (this.fullName !== this.previousValue) {

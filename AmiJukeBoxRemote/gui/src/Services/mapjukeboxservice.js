@@ -12,6 +12,12 @@ export class MapJukeboxService {
         return this.baseRepo.get('amijukebox/cancel').then(data=> {return data;});
     }
 
+    createStrips(){
+        return this.baseRepo.get('amijukebox/createstrips').then(data=> {return data;});
+    }
+
+
+/*
     getAllRmIdpsActivities(){
         return this.baseRepo.get('rmidpsactivties/getallrmidpsactivities').then(data => {return data;});
     }
@@ -96,7 +102,7 @@ export class MapJukeboxService {
         };        
         return this.baseRepo.put('rmidpsactivties/deleteidpsfilteractivity', data)
     }
-    
+  */  
     
     
 }
