@@ -68,11 +68,18 @@ namespace AmiJukeboxRemote.webapi
                 System.Drawing.Bitmap(Image.FromFile(imagepath));
             var graphicImage = Graphics.FromImage(bitMapImage);
             graphicImage.SmoothingMode = SmoothingMode.AntiAlias;
+            // Set Jukebox Selection A
             int opacity = 128;
-            graphicImage.DrawString(jbmodel.JbLetter+jbmodel.JbNumber,
+            graphicImage.DrawString(jbmodel.JbLetter+jbmodel.JbNumberA,
                 new Font("Traveling _Typewriter", 16, FontStyle.Bold),
-                new SolidBrush(Color.FromArgb(opacity, Color.Black)), new Point(3, 35));
+                new SolidBrush(Color.FromArgb(opacity, Color.Black)), new Point(3, 15));
             var textSize = TextRenderer.MeasureText(jbmodel.Artist1, new Font("Traveling _Typewriter", 12, FontStyle.Bold, GraphicsUnit.Point));
+            // Set Jukebox Selection B
+            graphicImage.DrawString(jbmodel.JbLetter + jbmodel.JbNumberB,
+                new Font("Traveling _Typewriter", 16, FontStyle.Bold),
+                new SolidBrush(Color.FromArgb(opacity, Color.Black)), new Point(3, 55));
+            textSize = TextRenderer.MeasureText(jbmodel.Artist1, new Font("Traveling _Typewriter", 12, FontStyle.Bold, GraphicsUnit.Point));
+
             graphicImage.DrawString(jbmodel.Artist1,
                 new Font("Traveling _Typewriter", 12, FontStyle.Bold),
                 SystemBrushes.WindowText, new Point(150 - Math.Min(150, (int)Math.Round(textSize.Width * 0.5)), 40));

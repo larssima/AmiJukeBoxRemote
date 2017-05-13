@@ -9,7 +9,8 @@ namespace AmiJukeBoxRemote.Models
     {
         public int Id { get; set;}
         public string JbLetter { get; set; }
-        public string JbNumber { get; set; }
+        public string JbNumberA { get; set; }
+        public string JbNumberB { get; set; }
         public int JbNumeric { get; set; }
         public string A1Song { get; set; }
         public string A2Song { get; set; }
