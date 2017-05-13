@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using AmiJukeBoxRemote.Models;
 using Dapper;
+using MySql.Data.MySqlClient;
 
 namespace AmiJukeBoxRemote.Database
 {
@@ -15,14 +16,26 @@ namespace AmiJukeBoxRemote.Database
 
         public List<JbSelectionModel> GetAllSelections()
         {
-            using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["JukeboxDatabase"]
+            using (IDbConnection db = new MySqlConnection(ConfigurationManager.ConnectionStrings["JukeboxDatabase"]
                 .ConnectionString))
 
             {
-
+                db.Open();
                 return db.Query<JbSelectionModel>
 
-                    ("Select * From jbselection where archived!=1 order by JbNumeric").ToList();
+                    ("Select * From amijukebox.jbselection where archived!=1 order by JbNumeric").ToList();
+            }
+        }
+        public List<JbSelectionModel> GetAllArchivedSelections()
+        {
+            using (IDbConnection db = new MySqlConnection(ConfigurationManager.ConnectionStrings["JukeboxDatabase"]
+                .ConnectionString))
+
+            {
+                db.Open();
+                return db.Query<JbSelectionModel>
+
+                    ("Select * From amijukebox.jbselection where archived=1 order by JbNumeric").ToList();
             }
         }
 

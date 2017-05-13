@@ -16,6 +16,11 @@ export class MapJukeboxService {
         return this.baseRepo.get('amijukebox/createstrips').then(data=> {return data;});
     }
 
+    getAllJukeboxSelections(){
+        return this.baseRepo.get('amijukebox/getalljukeboxselections').then(data=> {return data;});
+    }
+
+
 
 /*
     getAllRmIdpsActivities(){

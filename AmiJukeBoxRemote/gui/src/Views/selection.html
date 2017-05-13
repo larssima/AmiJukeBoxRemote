@@ -14,8 +14,10 @@
              <p style="clear: both;">-->
             <!--<div repeat.for="i of 10"><img src="../../assets/images/jukecard-orange-300x100.png" style="float: left; margin-right: 2px;" /></div>
              <p style="clear: both;">-->
-            <div repeat.for="i of 100"><img src="../../assets/images/jukecard-lightgreen-300x100.png" style="float: left; margin-right: 2px;">
-                <!--<ia1><span>ABBA</span></ia1>-->
+            <div repeat.for="jbselection of mapJukeboxSelections" class="pointer">
+              <img src="${getImagePath(jbselection)}"  style="float: left; margin-right: 2px;"/>
+              <!--jukecard-lightgreen-300x100_1.png jukecard-lightgreen-300x100_1.png-->
+              <!--[src]='../../assets/images/+jbselection.ImageStripName'-->
             </div>
              <p style="clear: both;">
             <!--<div repeat.for="i of 10"><img src="../../assets/images/jukecard-lightgreen-300x100-v2.png" style="float: left; margin-right: 2px;" /></div>-->

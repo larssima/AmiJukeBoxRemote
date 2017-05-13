@@ -15,6 +15,7 @@ export class Welcome {
   constructor(mapJukeboxService, eventAggregator, dialogService, confirmDialog, observerLocator) {
     this.mapJukeboxService = mapJukeboxService;
     this.dialogService = dialogService;
+    this.mapJukeboxSelections = [];
     this.ea = eventAggregator;
     this.dateFrom = '';
     this.dateTo = '';
@@ -24,6 +25,21 @@ export class Welcome {
     this.observerLocator.getObserver(this, 'dateTo').subscribe((newValue, oldValue) => this.enableImport());     
   }
   
+
+  attached() {
+    return this.loadData();
+  }
+
+  loadData() {
+    return this.mapJukeboxService.getAllJukeboxSelections().then(data => {
+      this.mapJukeboxSelections = data;
+      });
+  }
+
+  getImagePath(jbselection){
+    return "../../assets/images/" + jbselection.ImageStripName;
+  }
+
   activate() {
   }
 

@@ -36,7 +36,7 @@ namespace AmiJukeboxRemote.webapi
         [HttpPost]
         public bool SaveStripToDb(JbSelectionModel jbmodel)
         {
-            jbmodel.ImageStripName = CreateJbStrip(jbmodel.ImageStripTemplate,jbmodel);
+            jbmodel.ImageStripName = CreateJbStrip(jbmodel);
             return false;
         }
 
@@ -45,54 +45,56 @@ namespace AmiJukeboxRemote.webapi
         public bool CreateAllStrips()
         {
             List<JbSelectionModel> allSelections = _jbDb.GetAllSelections();
+            foreach (var jbmodel in allSelections)
+            {
+                CreateJbStrip(jbmodel);
+            }
             return true;
         }
 
-        private string CreateJbStrip(string jbmodelImageStripTemplate, JbSelectionModel jbmodel)
+        [Route("getalljukeboxselections")]
+        [HttpGet]
+        public List<JbSelectionModel> GetAllJukeboxSelectíons()
         {
-            var imagepath = "~/gui/assets/images/" + jbmodelImageStripTemplate;
+            return _jbDb.GetAllSelections();
+        }
+
+
+        private string CreateJbStrip(JbSelectionModel jbmodel)
+        {
+            var imagepath = @"C:\Users\DiNer0-2\Documents\GitHub\AmiJukeBoxRemote\AmiJukeBoxRemote\gui\assets\images\" + jbmodel.ImageStripTemplate;
             Bitmap bitmap = null;
             var bitMapImage = new
-                System.Drawing.Bitmap(imagepath);
+                System.Drawing.Bitmap(Image.FromFile(imagepath));
             var graphicImage = Graphics.FromImage(bitMapImage);
             graphicImage.SmoothingMode = SmoothingMode.AntiAlias;
-            var textSize = TextRenderer.MeasureText(jbmodel.Artist1, new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Point));
+            int opacity = 128;
+            graphicImage.DrawString(jbmodel.JbLetter+jbmodel.JbNumber,
+                new Font("Traveling _Typewriter", 16, FontStyle.Bold),
+                new SolidBrush(Color.FromArgb(opacity, Color.Black)), new Point(3, 35));
+            var textSize = TextRenderer.MeasureText(jbmodel.Artist1, new Font("Traveling _Typewriter", 12, FontStyle.Bold, GraphicsUnit.Point));
             graphicImage.DrawString(jbmodel.Artist1,
-                new Font("Arial", 12, FontStyle.Bold),
+                new Font("Traveling _Typewriter", 12, FontStyle.Bold),
                 SystemBrushes.WindowText, new Point(150 - Math.Min(150, (int)Math.Round(textSize.Width * 0.5)), 40));
-            textSize = TextRenderer.MeasureText(jbmodel.A1Song, new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Point));
+            textSize = TextRenderer.MeasureText(jbmodel.A1Song, new Font("Traveling _Typewriter", 12, FontStyle.Bold, GraphicsUnit.Point));
             graphicImage.DrawString(jbmodel.A1Song,
-                new Font("Arial", 12, FontStyle.Bold),
+                new Font("Traveling _Typewriter", 12, FontStyle.Bold),
                 SystemBrushes.WindowText, new Point(150 - Math.Min(150, (int)Math.Round(textSize.Width * 0.5)), 15));
-            textSize = TextRenderer.MeasureText(jbmodel.B1Song, new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Point));
+            textSize = TextRenderer.MeasureText(jbmodel.B1Song, new Font("Traveling _Typewriter", 12, FontStyle.Bold, GraphicsUnit.Point));
             if (textSize.Width > 250)
             {
 
             }
             graphicImage.DrawString(jbmodel.B1Song,
-                new Font("Arial", 12, FontStyle.Bold),
+                new Font("Traveling _Typewriter", 12, FontStyle.Bold),
                 SystemBrushes.WindowText, new Point(150 - Math.Min(150, (int)Math.Round(textSize.Width * 0.5)), 70));
 
             //Save the new image to the response output stream.
-            var imagepathcreated = "~/gui/assets/images/" + jbmodelImageStripTemplate + jbmodel.JbNumeric + ".png";
-            bitMapImage.Save("~/gui/assets/images/" + jbmodelImageStripTemplate +jbmodel.JbNumeric, ImageFormat.Png);
+            var imagepathcreated = @"C:\Users\DiNer0-2\Documents\GitHub\AmiJukeBoxRemote\AmiJukeBoxRemote\gui\assets\images\" + jbmodel.ImageStripTemplate.Remove(jbmodel.ImageStripTemplate.Length-4) + "_" + jbmodel.JbNumeric + ".png";
+            bitMapImage.Save(imagepathcreated, ImageFormat.Png);
             graphicImage.Dispose();
             bitMapImage.Dispose();
 
-            //using (var stream = File.OpenRead(imagepath))
-            //{
-            //    bitmap = (Bitmap)Image.FromStream(stream);
-            //}
-            //using (bitmap)
-            //using (var graphics = Graphics.FromImage(bitmap))
-            //using (var font = new Font("Arial", 20, FontStyle.Regular))
-            //{
-            //    // Do what you want using the Graphics object here.
-            //    graphics.DrawString("Hello World!", font, Brushes.Red, 0, 0);
-
-            //    // Important part!
-            //    bitmap.Save(imagepath);
-            //}
             return imagepathcreated;
         }
 
