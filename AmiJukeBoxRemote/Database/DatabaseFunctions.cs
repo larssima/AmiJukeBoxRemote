@@ -43,7 +43,7 @@ namespace AmiJukeBoxRemote.Database
         {
             try
             {
-                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["JukeboxDatabase"].ConnectionString))
+                using (IDbConnection db = new MySqlConnection(ConfigurationManager.ConnectionStrings["JukeboxDatabase"].ConnectionString))
 
                 {
 
@@ -55,6 +55,34 @@ namespace AmiJukeBoxRemote.Database
                         {
                             //rmIdpsModel.RmEmpNo,
                             //rmIdpsModel.IdpsEmpNo
+                        });
+
+                    db.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool UpdateImagePath(JbSelectionModel jbmodel)
+        {
+            try
+            {
+                using (IDbConnection db = new MySqlConnection(ConfigurationManager.ConnectionStrings["JukeboxDatabase"].ConnectionString))
+
+                {
+
+                    db.Open();
+
+                    string sqlQuery = "Update amijukebox.jbselection Set ImageStripName = @imagestripname Where Id = @Id";
+                    db.Execute(sqlQuery,
+                        new
+                        {
+                            jbmodel.ImageStripName,
+                            jbmodel.Id
                         });
 
                     db.Close();
