@@ -14,7 +14,7 @@ System.config({
     "aurelia-dialog": "npm:aurelia-dialog@1.0.0-beta.3.0.1",
     "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.1",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.0.1",
-    "aurelia-framework": "npm:aurelia-framework@1.0.6",
+    "aurelia-framework": "npm:aurelia-framework@1.1.2",
     "aurelia-history-browser": "npm:aurelia-history-browser@1.0.0",
     "aurelia-loader-default": "npm:aurelia-loader-default@1.0.0",
     "aurelia-logging-console": "npm:aurelia-logging-console@1.0.0",
@@ -24,12 +24,14 @@ System.config({
     "aurelia-templating-binding": "npm:aurelia-templating-binding@1.0.0",
     "aurelia-templating-resources": "npm:aurelia-templating-resources@1.4.0",
     "aurelia-templating-router": "npm:aurelia-templating-router@1.0.0",
+    "benib/aurelia-hammer": "github:benib/aurelia-hammer@0.1.0",
     "bluebird": "npm:bluebird@3.4.1",
     "bootstrap": "github:twbs/bootstrap@3.3.7",
     "css": "github:systemjs/plugin-css@0.1.33",
     "eonasdan/bootstrap-datetimepicker": "github:eonasdan/bootstrap-datetimepicker@4.17.47",
     "fetch": "github:github/fetch@1.0.0",
     "font-awesome": "npm:font-awesome@4.7.0",
+    "hammer": "github:hammerjs/hammer.js@2.0.8",
     "jquery": "npm:jquery@2.2.4",
     "moment": "npm:moment@2.17.1",
     "text": "github:systemjs/plugin-text@0.0.8",
@@ -37,6 +39,10 @@ System.config({
     "github:CodeSeven/toastr@2.1.3": {
       "css": "github:systemjs/plugin-css@0.1.33",
       "jquery": "npm:jquery@2.2.4"
+    },
+    "github:benib/aurelia-hammer@0.1.0": {
+      "aurelia-framework": "npm:aurelia-framework@1.1.2",
+      "hammerjs": "npm:hammerjs@2.0.8"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
@@ -80,7 +86,7 @@ System.config({
     },
     "npm:aurelia-bootstrapper@1.0.0": {
       "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.1",
-      "aurelia-framework": "npm:aurelia-framework@1.0.6",
+      "aurelia-framework": "npm:aurelia-framework@1.1.2",
       "aurelia-history": "npm:aurelia-history@1.0.0",
       "aurelia-history-browser": "npm:aurelia-history-browser@1.0.0",
       "aurelia-loader-default": "npm:aurelia-loader-default@1.0.0",
@@ -107,7 +113,7 @@ System.config({
     "npm:aurelia-event-aggregator@1.0.1": {
       "aurelia-logging": "npm:aurelia-logging@1.3.1"
     },
-    "npm:aurelia-framework@1.0.6": {
+    "npm:aurelia-framework@1.1.2": {
       "aurelia-binding": "npm:aurelia-binding@1.2.1",
       "aurelia-dependency-injection": "npm:aurelia-dependency-injection@1.3.1",
       "aurelia-loader": "npm:aurelia-loader@1.0.0",
@@ -201,6 +207,9 @@ System.config({
     },
     "npm:font-awesome@4.7.0": {
       "css": "github:systemjs/plugin-css@0.1.33"
+    },
+    "npm:hammerjs@2.0.8": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"

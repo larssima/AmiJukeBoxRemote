@@ -4,6 +4,7 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging()
+    .plugin('benib/aurelia-hammer')
     .plugin('aurelia-dialog', config => {
       config.useDefaults();
       config.settings.lock = false;

@@ -15,9 +15,11 @@
             <!--<div repeat.for="i of 10"><img src="../../assets/images/jukecard-orange-300x100.png" style="float: left; margin-right: 2px;" /></div>
              <p style="clear: both;">-->
             <div repeat.for="jbselection of mapJukeboxSelections" class="pointer">
-              <img src="${getImagePath(jbselection)}"  style="float: left; margin-right: 2px;"/>
-              <!--jukecard-lightgreen-300x100_1.png jukecard-lightgreen-300x100_1.png-->
-              <!--[src]='../../assets/images/+jbselection.ImageStripName'-->
+              <div hammer-press.call="handlePress($event,jbselection)">
+                <!--<div hammer-hold.call="handleHold($event)">-->
+                  <img src="${getImagePath(jbselection)}"  style="float: left; margin-right: 2px;"/>
+                <!--</div>-->
+              </div>
             </div>
              <p style="clear: both;">
             <!--<div repeat.for="i of 10"><img src="../../assets/images/jukecard-lightgreen-300x100-v2.png" style="float: left; margin-right: 2px;" /></div>-->
