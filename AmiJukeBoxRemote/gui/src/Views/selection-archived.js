@@ -3,21 +3,20 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { MapJukeboxService } from '../services/mapjukeboxservice';
 import { DialogService } from 'aurelia-dialog';
 import { ConfirmDialog } from '../Components/confirmation-dialog';
-import { ChooseSideDialog } from '../Components/chooseside-dialog';
+import { ChooseSideDialog2 } from '../Components/chooseside-dialog2';
 import * as toastr from 'toastr';
 
-@inject(MapJukeboxService, EventAggregator, DialogService, ConfirmDialog, ChooseSideDialog, ObserverLocator)
+@inject(MapJukeboxService, EventAggregator, DialogService, ConfirmDialog, ChooseSideDialog2, ObserverLocator)
 
 @containerless()
 
 export class Welcome {
   heading = '';
 
-  constructor(mapJukeboxService, eventAggregator, dialogService, confirmDialog, chooseSideDialog, observerLocator) {
+  constructor(mapJukeboxService, eventAggregator, dialogService, confirmDialog, chooseSideDialog2, observerLocator) {
     this.mapJukeboxService = mapJukeboxService;
     this.dialogService = dialogService;
     this.mapJukeboxSelections = [];
-    this.choosemessage = "Test";
     this.ea = eventAggregator;
     this.dateFrom = '';
     this.dateTo = '';
@@ -42,10 +41,9 @@ export class Welcome {
 
   handlePress($event,jbselection) {
     var _this = this;
-    this.choosemessage = "A: " + jbselection.A1Song + " - " + "B: " + jbselection.B1Song;
-    this.dialogService.open({ viewModel: ChooseSideDialog, model: { value: this.choosemessage } }).then(function (response) {
+    this.dialogService.open({ viewModel: ChooseSideDialog2, model: { sideA: jbselection.A1Song, sideB: jbselection.B1Song } }).then(function (response) {
       if (!response.wasCancelled) {
-        // Play Side A
+        this.mapJukeboxService.playSongOnSpotify(jbselection.Artist1,jbselection.A1Song,1);
       }
       else {
         // Play Side B
@@ -58,7 +56,7 @@ export class Welcome {
   }
 
   loadData() {
-    return this.mapJukeboxService.getAllJukeboxSelections().then(data => {
+    return this.mapJukeboxService.getAllArchivedJukeboxSelections().then(data => {
       this.mapJukeboxSelections = data;
       });
   }
@@ -70,29 +68,17 @@ export class Welcome {
   activate() {
   }
 
-  submit() {
-    this.previousValue = this.fullName;
-    alert(`Welcome, ${this.fullName}!`);
-  }
-
   cancel()
   {
     return this.mapJukeboxService.cancelRecord();
   }
 
-  canDeactivate() {
-    /*
-    if (this.fullName !== this.previousValue) {
-      return confirm('Are you sure you want to leave?');
-    }
-    */
-  }
-
-  enableImport() {
-    if(this.dateFrom!='' && this.dateFrom != null && this.dateTo!='' && this.dateTo != null)
-      this.enableImportBtn = false;
-    else
-      this.enableImportBtn = true;
+  createstrips()
+  {
+    var _this = this;
+    return this.mapJukeboxService.createStrips().then(data => {
+      _this.loadData();
+    });
   }
 }
 

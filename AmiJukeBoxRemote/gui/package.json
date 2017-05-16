@@ -98,6 +98,7 @@
   "dependencies": {
     "aurelia-bootstrap-datetimepicker": "^0.3.2",
     "bootstrap-datepicker": "^1.6.4",
-    "moment": "^2.17.1"
+    "moment": "^2.17.1",
+    "spotify-web-api-node": "^2.4.0"
   }
 }

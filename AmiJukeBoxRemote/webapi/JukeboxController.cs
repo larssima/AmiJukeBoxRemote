@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using AmiJukeBoxRemote.Database;
 using AmiJukeBoxRemote.Models;
 using AmiJukeBoxRemote.Mqtt;
+using AmiJukeBoxRemote.Spotify;
 
 namespace AmiJukeboxRemote.webapi
 {
@@ -23,6 +24,7 @@ namespace AmiJukeboxRemote.webapi
     {
         private readonly Mqtt _mqtt = new Mqtt();
         private readonly DatabaseFunctions _jbDb = new DatabaseFunctions();
+        private readonly SpotifyInterface _spotifyInterface = new SpotifyInterface();
 
         [Route("cancel")]
         [System.Web.Http.HttpGet]
@@ -30,6 +32,20 @@ namespace AmiJukeboxRemote.webapi
         {
             _mqtt.SendCancelToSubscriber();
             return true;
+        }
+
+        [Route("spotifylogin")]
+        [HttpGet]
+        public void LoginSpotify()
+        {
+            var spotInt = new SpotifyInterface();
+        }
+
+        [Route("playsongonspotify")]
+        [HttpPut]
+        public void PlaySongOnSpotify(SongModel songmodel)
+        {
+            _spotifyInterface.PlaySong(songmodel.Artist, songmodel.SongTitle,songmodel.Que);
         }
 
         [Route("savestrip")]
@@ -45,6 +61,7 @@ namespace AmiJukeboxRemote.webapi
         public bool CreateAllStrips()
         {
             List<JbSelectionModel> allSelections = _jbDb.GetAllSelections();
+            allSelections.AddRange(_jbDb.GetAllArchivedSelections());
             foreach (var jbmodel in allSelections)
             {
                 jbmodel.ImageStripName = CreateJbStrip(jbmodel);
@@ -60,6 +77,12 @@ namespace AmiJukeboxRemote.webapi
             return _jbDb.GetAllSelections();
         }
 
+        [Route("getallarchivedjukeboxselections")]
+        [HttpGet]
+        public List<JbSelectionModel> GetAllArchivedJukeboxSelectíons()
+        {
+            return _jbDb.GetAllArchivedSelections();
+        }
 
         private string CreateJbStrip(JbSelectionModel jbmodel)
         {
@@ -69,17 +92,20 @@ namespace AmiJukeboxRemote.webapi
                 System.Drawing.Bitmap(Image.FromFile(imagepath));
             var graphicImage = Graphics.FromImage(bitMapImage);
             graphicImage.SmoothingMode = SmoothingMode.AntiAlias;
-            
-            // Set Jukebox Selection A
-            int opacity = 168;
-            graphicImage.DrawString(jbmodel.JbLetter+jbmodel.JbNumberA,
-                new Font("Traveling _Typewriter", 10, FontStyle.Bold),
-                new SolidBrush(Color.FromArgb(opacity, Color.Black)), new Point(3, 31));
-            
-            // Set Jukebox Selection B
-            graphicImage.DrawString(jbmodel.JbLetter + jbmodel.JbNumberB,
-                new Font("Traveling _Typewriter", 10, FontStyle.Bold),
-                new SolidBrush(Color.FromArgb(opacity, Color.Black)), new Point(3, 51));
+
+            if (jbmodel.Archived == 0)
+            {
+                // Set Jukebox Selection A
+                int opacity = 168;
+                graphicImage.DrawString(jbmodel.JbLetter + jbmodel.JbNumberA,
+                    new Font("Traveling _Typewriter", 10, FontStyle.Bold),
+                    new SolidBrush(Color.FromArgb(opacity, Color.Black)), new Point(3, 31));
+
+                // Set Jukebox Selection B
+                graphicImage.DrawString(jbmodel.JbLetter + jbmodel.JbNumberB,
+                    new Font("Traveling _Typewriter", 10, FontStyle.Bold),
+                    new SolidBrush(Color.FromArgb(opacity, Color.Black)), new Point(3, 51));
+            }
 
             var textSize = TextRenderer.MeasureText(jbmodel.Artist1, new Font("Traveling _Typewriter", 12, FontStyle.Bold, GraphicsUnit.Point));
             graphicImage.DrawString(jbmodel.Artist1,
@@ -98,56 +124,24 @@ namespace AmiJukeboxRemote.webapi
                 new Font("Traveling _Typewriter", 12, FontStyle.Bold),
                 SystemBrushes.WindowText, new Point(150 - Math.Min(150, (int)Math.Round(textSize.Width * 0.5)), 70));
 
+
+            var fileEndName = jbmodel.Id + (jbmodel.Archived == 0 ? "" : "_arch");
+
             //Save the new image to the response output stream.
-            var imagepathcreated = @"C:\Users\DiNer0-2\Documents\GitHub\AmiJukeBoxRemote\AmiJukeBoxRemote\gui\assets\images\" + jbmodel.ImageStripTemplate.Remove(jbmodel.ImageStripTemplate.Length-4) + "_" + jbmodel.JbNumeric + ".png";
+            var imagepathcreated = @"C:\Users\DiNer0-2\Documents\GitHub\AmiJukeBoxRemote\AmiJukeBoxRemote\gui\assets\images\" + jbmodel.ImageStripTemplate.Remove(jbmodel.ImageStripTemplate.Length-4) + "_" + fileEndName + ".png";
             bitMapImage.Save(imagepathcreated, ImageFormat.Png);
             graphicImage.Dispose();
             bitMapImage.Dispose();
 
-            return jbmodel.ImageStripTemplate.Remove(jbmodel.ImageStripTemplate.Length - 4) + "_" + jbmodel.JbNumeric + ".png";
+            return jbmodel.ImageStripTemplate.Remove(jbmodel.ImageStripTemplate.Length - 4) + "_" + fileEndName + ".png";
         }
 
-        //[Route("pickup")]
-        //[HttpGet]
-        //public List<IgnoreActivityPickupModel> ListAllPickupIgnoreActivities()
-        //{
-        //    return (List<IgnoreActivityPickupModel>)CacheHandlerService.GetPickupIgnoreActivities();
-        //}
 
-        //[Route("insertactcodepassive")]
-        //[HttpPut]
-        //public bool InsertPassiveActivityCode(IgnoreActivityPassiveModel model)
-        //{
-        //    var ignoreAct = new IgnoreActivityPassiveModel();
-        //    ignoreAct.ActivityCode = model.ActivityCode;
-        //    return CacheHandlerService.InsertPassiveActivityCode(ignoreAct);
-        //}
-
-        //[Route("deleteactcodepassive")]
-        //[HttpPut]
-        //public bool DeletePassiveActivityCode(IgnoreActivityPassiveModel model)
-        //{
-        //    var ignoreAct = new IgnoreActivityPassiveModel();
-        //    ignoreAct.ActivityCode = model.ActivityCode;
-        //    return CacheHandlerService.DeletePassiveActivityCode(ignoreAct);
-        //}
-        //[Route("insertactcodepickup")]
-        //[HttpPut]
-        //public bool InsertPickupActivityCode(IgnoreActivityPickupModel model)
-        //{
-        //    var ignoreAct = new IgnoreActivityPickupModel();
-        //    ignoreAct.ActivityCode = model.ActivityCode;
-        //    return CacheHandlerService.InsertPickupActivityCode(ignoreAct);
-        //}
-
-        //[Route("deleteactcodepickup")]
-        //[HttpPut]
-        //public bool DeletePickupActivityCode(IgnoreActivityPickupModel model)
-        //{
-        //    var ignoreAct = new IgnoreActivityPickupModel();
-        //    ignoreAct.ActivityCode = model.ActivityCode;
-        //    return CacheHandlerService.DeletePickupActivityCode(ignoreAct);
-        //}
-
+        public class SongModel
+        {
+            public string Artist { get; set; }
+            public string SongTitle { get; set; }
+            public bool Que { get; set; }
+        }
     }
 }

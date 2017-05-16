@@ -20,6 +20,25 @@ export class MapJukeboxService {
         return this.baseRepo.get('amijukebox/getalljukeboxselections').then(data=> {return data;});
     }
 
+    getAllArchivedJukeboxSelections(){
+        return this.baseRepo.get('amijukebox/getallarchivedjukeboxselections').then(data=> {return data;});
+    }
+
+    loginToSpotify()
+    {
+        return this.baseRepo.get('amijukebox/spotifylogin').then(data=> {return data;});
+    }
+
+    playSongOnSpotify(artist,songtitle,que)
+    {
+        let data = {
+            Artist: artist,
+            SongTitle: songtitle,
+            Que: que
+        };          
+        return this.baseRepo.put('amijukebox/playsongonspotify',data)
+    }
+
 
 
 /*

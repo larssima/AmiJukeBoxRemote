@@ -19,12 +19,6 @@ export class Welcome {
     this.mapJukeboxSelections = [];
     this.choosemessage = "Test";
     this.ea = eventAggregator;
-    this.dateFrom = '';
-    this.dateTo = '';
-    this.observerLocator = observerLocator;
-    this.enableImportBtn = true;
-    this.observerLocator.getObserver(this, 'dateFrom').subscribe((newValue, oldValue) => this.enableImport());     
-    this.observerLocator.getObserver(this, 'dateTo').subscribe((newValue, oldValue) => this.enableImport());     
   }
   
 
@@ -58,9 +52,6 @@ export class Welcome {
   }
 
   loadData() {
-    return this.mapJukeboxService.getAllJukeboxSelections().then(data => {
-      this.mapJukeboxSelections = data;
-      });
   }
 
   getImagePath(jbselection){
@@ -70,29 +61,17 @@ export class Welcome {
   activate() {
   }
 
-  submit() {
-    this.previousValue = this.fullName;
-    alert(`Welcome, ${this.fullName}!`);
-  }
-
-  cancel()
+  loginspotify()
   {
-    return this.mapJukeboxService.cancelRecord();
+    return this.mapJukeboxService.loginToSpotify();
   }
 
-  canDeactivate() {
-    /*
-    if (this.fullName !== this.previousValue) {
-      return confirm('Are you sure you want to leave?');
-    }
-    */
-  }
-
-  enableImport() {
-    if(this.dateFrom!='' && this.dateFrom != null && this.dateTo!='' && this.dateTo != null)
-      this.enableImportBtn = false;
-    else
-      this.enableImportBtn = true;
+  createstrips()
+  {
+    var _this = this;
+    return this.mapJukeboxService.createStrips().then(data => {
+      _this.loadData();
+    });
   }
 }
 
