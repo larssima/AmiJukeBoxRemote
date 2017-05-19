@@ -43,9 +43,16 @@ namespace AmiJukeboxRemote.webapi
 
         [Route("playsongonspotify")]
         [HttpPut]
-        public void PlaySongOnSpotify(SongModel songmodel)
+        public bool PlaySongOnSpotify(SongModel songmodel)
         {
-            _spotifyInterface.PlaySong(songmodel.Artist, songmodel.SongTitle,songmodel.Que);
+            return _spotifyInterface.PlaySong(songmodel.Artist, songmodel.SongTitle,songmodel.Que);
+        }
+
+        [Route("playsongonjukebox")]
+        [HttpPut]
+        public bool PlaySongOnJukebox(JukeboxModel jukeboxmodel)
+        {
+            return true;
         }
 
         [Route("savestrip")]
@@ -141,7 +148,13 @@ namespace AmiJukeboxRemote.webapi
         {
             public string Artist { get; set; }
             public string SongTitle { get; set; }
-            public bool Que { get; set; }
+            public string Que { get; set; }
+        }
+
+        public class JukeboxModel
+        {
+            public string JbLetter { get; set; }
+            public string JbNumber { get; set; }
         }
     }
 }

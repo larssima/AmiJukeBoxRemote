@@ -3,17 +3,16 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { MapJukeboxService } from '../services/mapjukeboxservice';
 import { DialogService } from 'aurelia-dialog';
 import { ConfirmDialog } from '../Components/confirmation-dialog';
-import { ChooseSideDialog } from '../Components/chooseside-dialog';
 import * as toastr from 'toastr';
 
-@inject(MapJukeboxService, EventAggregator, DialogService, ConfirmDialog, ChooseSideDialog, ObserverLocator)
+@inject(MapJukeboxService, EventAggregator, DialogService, ConfirmDialog, ObserverLocator)
 
 @containerless()
 
 export class Welcome {
   heading = '';
 
-  constructor(mapJukeboxService, eventAggregator, dialogService, confirmDialog, chooseSideDialog, observerLocator) {
+  constructor(mapJukeboxService, eventAggregator, dialogService, confirmDialog, observerLocator) {
     this.mapJukeboxService = mapJukeboxService;
     this.dialogService = dialogService;
     this.mapJukeboxSelections = [];
@@ -25,6 +24,11 @@ export class Welcome {
     this.enableImportBtn = true;
     this.observerLocator.getObserver(this, 'dateFrom').subscribe((newValue, oldValue) => this.enableImport());     
     this.observerLocator.getObserver(this, 'dateTo').subscribe((newValue, oldValue) => this.enableImport());     
+    this.selectedA = "";
+    this.selectedB = "";
+    this.jbLetter = "";
+    this.jbNumberA = "";
+    this.jbNumberB = "";
   }
   
 
@@ -42,15 +46,19 @@ export class Welcome {
 
   handlePress($event,jbselection) {
     var _this = this;
-    this.choosemessage = "A: " + jbselection.A1Song + " - " + "B: " + jbselection.B1Song;
-    this.dialogService.open({ viewModel: ChooseSideDialog, model: { value: this.choosemessage } }).then(function (response) {
-      if (!response.wasCancelled) {
-        // Play Side A
-      }
-      else {
-        // Play Side B
-      }
-    });
+    this.jbLetter = jbselection.JbLetter;
+    this.jbNumberA = jbselection.JbNumberA;
+    this.jbNumberB = jbselection.JbNumberB;
+    this.selectedA = jbselection.A1Song;
+    this.selectedB = jbselection.B1Song;    
+    $('#play-jukebox-modal').modal('show');
+  }  
+
+  playSongOnJukebox(jbLetter,jbNumber)
+  {
+    return this.mapJukeboxService.playSongOnJukebox(jbLetter,jbNumber).then(data => {
+      $('#play-jukebox-modal').modal('hide');
+    })
   }  
 
   attached() {

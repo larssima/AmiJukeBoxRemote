@@ -36,9 +36,9 @@ namespace AmiJukeBoxRemote.Spotify
             return;
         }
 
-        public bool PlaySong(string artistName, string songTitle, bool que)
+        public bool PlaySong(string artistName, string songTitle, string que)
         {
-            return false;
+            return true;
         }
 
 

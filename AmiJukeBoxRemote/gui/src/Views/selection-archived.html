@@ -5,24 +5,58 @@
     <h2>${heading}</h2>
       <div class="row">
         <div class="col-xs-12">
-        <!--<button class="btn btn-primary btn-responsive" data-toggle="button" click.delegate="cancel()">Cancel</button>-->
-        <!--<button class="btn btn-primary btn-responsive" click.delegate="createstrips()">Create Strips</button>-->
+        </div>
       </div> 
       <div class="row" style="margin-left: 12px">
-            <!--<div repeat.for="i of 100"><img src="../../assets/images/jukecard-green-300x100.png" style="float: left; margin-right: 2px;" /></div>
-             <p style="clear: both;">-->
-            <!--<div repeat.for="i of 10"><img src="../../assets/images/jukecard-orange-300x100.png" style="float: left; margin-right: 2px;" /></div>
-             <p style="clear: both;">-->
             <div repeat.for="jbselection of mapJukeboxSelections" class="pointer">
               <div hammer-press.call="handlePress($event,jbselection)">
-                <!--<div hammer-hold.call="handleHold($event)">-->
                   <img src="${getImagePath(jbselection)}"  style="float: left; margin-right: 2px;"/>
-                <!--</div>-->
               </div>
             </div>
              <p style="clear: both;">
             <!--<div repeat.for="i of 10"><img src="../../assets/images/jukecard-lightgreen-300x100-v2.png" style="float: left; margin-right: 2px;" /></div>-->
             
       </div>
+
+      <div class="modal fade" id="play-spotify-modal" tabindex="-1" role="dialog" aria-labelledby="play-spotify-modal">
+          <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Play Song</h4>
+                  </div>
+                  <form id="play-spotify-form">
+                      <div class="modal-body">
+
+                          <div class="row">
+                            <div class="col-xs-6">
+                              <button click.trigger="playSongOnSpotify(artist1,selectedA,1)" class="btn btn-info btn-lg">
+                                <p><i class="fa fa-play-circle"></i> ${selectedA}</p>
+                              </a>        
+                            </div>
+                          </div>
+                          <br/>
+                          <div class="row">
+                            <div class="col-xs-6">
+                              <button click.trigger="playSongOnSpotify(artist1,selectedB,1)" class="btn btn-info btn-lg">
+                                <p><i class="fa fa-play-circle"></i> ${selectedB}</p>
+                              </a>        
+                            </div>                          
+                          </div>
+                          <br/>
+                          <div class="row">
+                            <div class="col-xs-6">
+                              <input type="checkbox" name="que" value="true" checked="true"> Add To Que
+                            </div>                          
+                          </div>
+                      </div>
+
+                      <div class="modal-footer">
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+      
   </section>
 </template>

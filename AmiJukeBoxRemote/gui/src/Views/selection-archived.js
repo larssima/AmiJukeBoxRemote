@@ -3,17 +3,16 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { MapJukeboxService } from '../services/mapjukeboxservice';
 import { DialogService } from 'aurelia-dialog';
 import { ConfirmDialog } from '../Components/confirmation-dialog';
-import { ChooseSideDialog2 } from '../Components/chooseside-dialog2';
 import * as toastr from 'toastr';
 
-@inject(MapJukeboxService, EventAggregator, DialogService, ConfirmDialog, ChooseSideDialog2, ObserverLocator)
+@inject(MapJukeboxService, EventAggregator, DialogService, ConfirmDialog, ObserverLocator)
 
 @containerless()
 
 export class Welcome {
   heading = '';
 
-  constructor(mapJukeboxService, eventAggregator, dialogService, confirmDialog, chooseSideDialog2, observerLocator) {
+  constructor(mapJukeboxService, eventAggregator, dialogService, confirmDialog,observerLocator) {
     this.mapJukeboxService = mapJukeboxService;
     this.dialogService = dialogService;
     this.mapJukeboxSelections = [];
@@ -22,6 +21,9 @@ export class Welcome {
     this.dateTo = '';
     this.observerLocator = observerLocator;
     this.enableImportBtn = true;
+    this.selectedA = '';
+    this.selectedB = ''; 
+    this.artist1 = '';
     this.observerLocator.getObserver(this, 'dateFrom').subscribe((newValue, oldValue) => this.enableImport());     
     this.observerLocator.getObserver(this, 'dateTo').subscribe((newValue, oldValue) => this.enableImport());     
   }
@@ -41,15 +43,18 @@ export class Welcome {
 
   handlePress($event,jbselection) {
     var _this = this;
-    this.dialogService.open({ viewModel: ChooseSideDialog2, model: { sideA: jbselection.A1Song, sideB: jbselection.B1Song } }).then(function (response) {
-      if (!response.wasCancelled) {
-        this.mapJukeboxService.playSongOnSpotify(jbselection.Artist1,jbselection.A1Song,1);
-      }
-      else {
-        // Play Side B
-      }
-    });
+    this.selectedA = jbselection.A1Song;
+    this.selectedB = jbselection.B1Song;
+    this.artist1 = jbselection.Artist1;
+     $('#play-spotify-modal').modal('show');
   }  
+  
+  playSongOnSpotify(artist,song,qued)
+  {
+    return this.mapJukeboxService.playSongOnSpotify(artist,song,qued).then(data => {
+      $('#play-spotify-modal').modal('hide');
+    })
+  }
 
   attached() {
     return this.loadData();
