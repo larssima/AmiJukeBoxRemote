@@ -343,6 +343,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Spotify\SpotifyInterface.cs" />
+    <Compile Include="Spotify\TimedWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Spotify\TracksRoot.cs" />
     <Compile Include="webapi\JukeboxController.cs" />
   </ItemGroup>
   <ItemGroup>

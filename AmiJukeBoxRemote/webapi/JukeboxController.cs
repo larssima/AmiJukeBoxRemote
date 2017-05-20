@@ -43,7 +43,7 @@ namespace AmiJukeboxRemote.webapi
 
         [Route("playsongonspotify")]
         [HttpPut]
-        public bool PlaySongOnSpotify(SongModel songmodel)
+        public System.Threading.Tasks.Task<bool> PlaySongOnSpotify(SongModel songmodel)
         {
             return _spotifyInterface.PlaySong(songmodel.Artist, songmodel.SongTitle,songmodel.Que);
         }
@@ -96,7 +96,7 @@ namespace AmiJukeboxRemote.webapi
             var imagepath = @"C:\Users\DiNer0-2\Documents\GitHub\AmiJukeBoxRemote\AmiJukeBoxRemote\gui\assets\images\" + jbmodel.ImageStripTemplate;
             Bitmap bitmap = null;
             var bitMapImage = new
-                System.Drawing.Bitmap(Image.FromFile(imagepath));
+                System.Drawing.Bitmap(System.Drawing.Image.FromFile(imagepath));
             var graphicImage = Graphics.FromImage(bitMapImage);
             graphicImage.SmoothingMode = SmoothingMode.AntiAlias;
 
