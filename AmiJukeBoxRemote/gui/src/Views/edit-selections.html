@@ -104,8 +104,6 @@
                                         autofocus />
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="txtJbNumberB">Selection B Nr</label>
@@ -127,16 +125,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="txtJbA1Song">Song A1</label>
-                                    <input maxlength="45" type="text" class="form-control" value.bind="insert_JbA1Song"
+                                    <input maxlength="45" type="text" class="form-control" value.bind="insert_A1Song"
                                         autofocus />
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="txtJbA2Song">Song A2</label>
-                                    <input maxlength="45" type="text" class="form-control" value.bind="insert_JbA2Song"
+                                    <input maxlength="45" type="text" class="form-control" value.bind="insert_A2Song"
                                         autofocus />
                                 </div>
                             </div>
@@ -145,16 +141,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="txtJbB1Song">Song B1</label>
-                                    <input maxlength="45" type="text" class="form-control" value.bind="insert_JbB1Song"
+                                    <input maxlength="45" type="text" class="form-control" value.bind="insert_B1Song"
                                         autofocus />
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="txtJbB2Song">Song B2</label>
-                                    <input maxlength="45" type="text" class="form-control" value.bind="insert_JbB2Song"
+                                    <input maxlength="45" type="text" class="form-control" value.bind="insert_B2Song"
                                         autofocus />
                                 </div>
                             </div>
@@ -163,7 +157,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="txtJbArtist1">Artist 1</label>
-                                    <input maxlength="45" type="text" class="form-control" value.bind="insert_JbArtist1"
+                                    <input maxlength="45" type="text" class="form-control" value.bind="insert_Artist1"
+                                        autofocus />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="txtJbArtist2">Artist 2</label>
+                                    <input maxlength="45" type="text" class="form-control" value.bind="insert_Artist2"
                                         autofocus />
                                 </div>
                             </div>
@@ -171,8 +172,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="txtJbArtist2">Artist 2</label>
-                                    <input maxlength="45" type="text" class="form-control" value.bind="insert_JbArtist2"
+                                    <label for="txtImageStripTemplate">Strip Template</label>
+                                    <input maxlength="255" type="text" class="form-control" value.bind="insert_ImageStripTemplate"
                                         autofocus />
                                 </div>
                             </div>
@@ -183,6 +184,14 @@
                                     <label for="txtMusicCategory">Music Category</label>
                                     <input maxlength="45" type="text" class="form-control" value.bind="insert_MusicCategory"
                                         autofocus />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="txtArchived">Archived</label>
+                                    <input type="checkbox" class="form-control" value.bind="insert_Archived" autofocus />
                                 </div>
                             </div>
                         </div>

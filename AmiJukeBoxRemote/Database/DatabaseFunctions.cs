@@ -39,32 +39,63 @@ namespace AmiJukeBoxRemote.Database
             }
         }
 
-        public bool SaveToDataBase(JbSelectionModel jbmopdel)
+        public int GetNextId()
         {
+            using (IDbConnection db = new MySqlConnection(ConfigurationManager.ConnectionStrings["JukeboxDatabase"]
+                .ConnectionString))
+
+            {
+                db.Open();
+                var id = db.Query<int>
+
+                    ("Select Max(Id) From amijukebox.jbselection").ToString();
+                return int.Parse(id + 1);
+            }
+        }
+
+        public int SaveToDataBase(JbSelectionModel jbmodel)
+        {
+            var id = -1;
             try
             {
                 using (IDbConnection db = new MySqlConnection(ConfigurationManager.ConnectionStrings["JukeboxDatabase"].ConnectionString))
 
                 {
-
                     db.Open();
 
-                    string sqlQuery = "INSERT INTO []([RmEmpNo],[IdpsEmpNo]) VALUES (@RmEmpNo,@IdpsEmpNo)";
+                    string sqlQuery = "INSERT INTO amijukebox.jbselection (jbletter,jbnumbera,jbnumberb,jbnumeric,a1song,a2song," +
+                                      "b1song,b2song,artist1,artist2,imagestripname,musiccategory,archived,imagestriptemplate) VALUES (@jbletter,@jbnumbera," +
+                                      "@jbnumberb,@jbnumeric,@a1song,@a2song,@b1song,@b2song,@artist1,@artist2,@imagestripname,@musiccategory,@archived,@imagestriptemplate)";
                     db.Execute(sqlQuery,
                         new
                         {
-                            //rmIdpsModel.RmEmpNo,
-                            //rmIdpsModel.IdpsEmpNo
+                            jbmodel.JbLetter,
+                            jbmodel.JbNumberA,
+                            jbmodel.JbNumberB,
+                            jbmodel.JbNumeric,
+                            jbmodel.A1Song,
+                            jbmodel.A2Song,
+                            jbmodel.B1Song,
+                            jbmodel.B2Song,
+                            jbmodel.Artist1,
+                            jbmodel.Artist2,
+                            jbmodel.ImageStripName,
+                            jbmodel.MusicCategory,
+                            jbmodel.Archived,
+                            jbmodel.ImageStripTemplate
                         });
+
+                    id = db.Query<int>("SELECT CAST(LAST_INSERT_ID() AS UNSIGNED INTEGER);").Single();
 
                     db.Close();
                 }
             }
             catch (Exception e)
             {
-                return false;
+                return id;
             }
-            return true;
+            jbmodel.Id = id;
+            return id;
         }
 
         public bool UpdateImagePath(JbSelectionModel jbmodel)

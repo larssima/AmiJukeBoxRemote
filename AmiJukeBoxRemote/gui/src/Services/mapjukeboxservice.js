@@ -47,4 +47,23 @@ export class MapJukeboxService {
         }
         return this.baseRepo.get('amijukebox/playsongonjukebox',data)
     }
+
+    insertSelection(jbletter,jbnumberA,jbnumberB,jbnumeric,a1song,a2song,b1song,b2song,artist1,artist2,imagestriptemplate,musiccategory,archived){
+        let data = {
+            JbLetter: jbletter,
+            JbNumberA: jbnumberA,
+            JbNumberB: jbnumberB,
+            JbNumeric: jbnumeric,
+            A1Song: a1song,
+            A2Song: a2song,
+            B1Song: b1song,
+            B2Song: b2song,
+            Artist1: artist1,
+            Artist2: artist2,
+            ImageStripTemplate: imagestriptemplate,
+            MusicCategory: musiccategory,
+            Archived: archived
+        };        
+        return this.baseRepo.put('amijukebox/savestrip', data)
+    }    
 }

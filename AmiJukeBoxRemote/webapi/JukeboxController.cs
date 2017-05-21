@@ -56,13 +56,19 @@ namespace AmiJukeboxRemote.webapi
         }
 
         [Route("savestrip")]
-        [HttpPost]
+        [HttpPut]
         public bool SaveStripToDb(JbSelectionModel jbmodel)
         {
-            jbmodel.ImageStripName = CreateJbStrip(jbmodel);
+            var ok = _jbDb.SaveToDataBase(jbmodel)>-1;
+            if (ok)
+            {
+                jbmodel.ImageStripName = CreateJbStrip(jbmodel);
+                _jbDb.UpdateImagePath(jbmodel);
+                return true;
+            }
             return false;
         }
-
+        
         [Route("createstrips")]
         [HttpGet]
         public bool CreateAllStrips()

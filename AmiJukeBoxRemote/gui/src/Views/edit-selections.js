@@ -23,13 +23,14 @@ export class MapEditSelections {
     this.insert_JbLetter = '';
     this.insert_JbNumberA = '';
     this.insert_JbNumberB = '';
+    this.insert_JbNumeric = '';
     this.insert_A1Song = '';
     this.insert_A2Song = '';
     this.insert_B1Song = '';
     this.insert_B2Song = '';
     this.insert_Artist1 = '';
     this.insert_Artist2 = '';
-    this.insert_ImageStripTemplate = '';
+    this.insert_ImageStripTemplate = 'jukecard-lightgreen-300x100.png';
     this.insert_MusicCategory = '';
     this.Insert_Archived = 0;
     this.canSave = false;
@@ -67,19 +68,38 @@ export class MapEditSelections {
     // });
   }
 
-  insertSelection(selection) {
-    console.log(selection);
-    // if (this.insert_IdpsActivityCode=='' || this.insert_RmActivityCode=='') return;
-    // this.mapIdpsActivitiesService.insertRmIdpsActivity(this.insert_RmActivityCode,this.insert_RmDescription,this.insert_IdpsActivityCode,this.insert_Description,this.insert_IdpsDescription).then((request) => {
-    //   this.loadData()
-    //   this.mapIdpsActivity = '';
-    //   this.insert_RmActivityCode = '';
-    //   this.insert_RmDescription = '';
-    //   this.insert_IdpsActivityCode = '';
-    //   this.insert_Description = '';
-    //   this.insert_IdpsDescription = '';
-    //   $('#new-activity-modal').modal('hide');
-    // });
+  insertSelection(request) {
+    console.log(request);
+    if (this.insert_JbLetter=='' || this.insert_JbNumberA=='' || this.insert_JbNumberB==''|| this.insert_JbNumeric=='' || this.insert_A1Song=='' || this.insert_B1Song=='' || this.insert_Artist1=='') return;
+    if(this.insert_ImageStripTemplate=='') { this.insert_ImageStripTemplate == 'jukecard-lightgreen-300x100.png'}
+    this.mapJukeboxService.insertSelection(this.insert_JbLetter,
+                                                  this.insert_JbNumberA,
+                                                  this.insert_JbNumberB,
+                                                  this.insert_JbNumeric,
+                                                  this.insert_A1Song,
+                                                  this.insert_A2Song,
+                                                  this.insert_B1Song,
+                                                  this.insert_B2Song,
+                                                  this.insert_Artist1,
+                                                  this.insert_Artist2,
+                                                  this.insert_ImageStripTemplate,
+                                                  this.insert_MusicCategory,
+                                                  this.Insert_Archived).then((request) => {
+        this.loadData()
+        this.insert_JbLetter ='';
+        this.insert_JbNumberA ='';
+        this.insert_JbNumberB ='';
+        this.insert_JbNumeric = '';
+        this.insert_A1Song ='';
+        this.insert_A2Song ='';
+        this.insert_B1Song ='';
+        this.insert_B2Song ='';
+        this.insert_Artist1 ='';
+        this.insert_Artist2 ='';
+        this.insert_MusicCategory ='';
+        this.Insert_Archived
+        $('#new-selection-modal').modal('hide');
+     });
   }
 
 
