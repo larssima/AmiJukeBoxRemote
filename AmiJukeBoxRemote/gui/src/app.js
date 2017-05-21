@@ -4,7 +4,8 @@ export class App {
     config.map([
       { route: ['', 'selection'], name: 'selections',      moduleId: 'views/selection',      nav: true, title: 'Selections' },
       { route: 'archived', name: 'archived',      moduleId: 'views/selection-archived',      nav: true, title: 'Archive' },
-      { route: 'admin', name: 'admin',  moduleId: 'views/admin',  nav: true, title: 'Administration' }
+      { route: 'admin', name: 'admin',  moduleId: 'views/admin',  nav: true, title: 'Administration' },
+      { route: 'editsel', name: 'editsel',  moduleId: 'views/edit-selections',  nav: true, title: 'Edit Selections' }
     ]);
 
     this.router = router;
