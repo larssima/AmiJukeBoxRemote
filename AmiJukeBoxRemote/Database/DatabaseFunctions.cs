@@ -125,5 +125,63 @@ namespace AmiJukeBoxRemote.Database
             }
             return true;
         }
+
+        public bool ArchiveSelection(int jbmodelId)
+        {
+            try
+            {
+                using (IDbConnection db = new MySqlConnection(ConfigurationManager.ConnectionStrings["JukeboxDatabase"].ConnectionString))
+
+                {
+
+                    db.Open();
+
+                    string sqlQuery = "Update amijukebox.jbselection Set Archived = 1 Where Id = @Id";
+                    db.Execute(sqlQuery,
+                        new
+                        {
+                            Id = jbmodelId
+                        });
+
+                    db.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool ReinstateSelection(JbSelectionModel jbmodel)
+        {
+            try
+            {
+                using (IDbConnection db = new MySqlConnection(ConfigurationManager.ConnectionStrings["JukeboxDatabase"].ConnectionString))
+
+                {
+
+                    db.Open();
+
+                    string sqlQuery = "Update amijukebox.jbselection Set JbLetter = @jbletter, JbNumberA = @jbnumbera, JbNumberB = @jbnumberb, JbNumeric = @jbnumeric, Archived = 0 Where Id = @Id";
+                    db.Execute(sqlQuery,
+                        new
+                        {
+                            jbmodel.JbLetter,
+                            jbmodel.JbNumberA,
+                            jbmodel.JbNumberB,
+                            jbmodel.JbNumeric,
+                            jbmodel.Id
+                        });
+
+                    db.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

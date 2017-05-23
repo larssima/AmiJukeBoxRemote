@@ -20,6 +20,7 @@ export class MapEditSelections {
     this.mapJukeboxSelection = '';
     this.confirmDialog = confirmDialog;
     this.value = 'Are you sure?';
+    this.insert_Id = -1;
     this.insert_JbLetter = '';
     this.insert_JbNumberA = '';
     this.insert_JbNumberB = '';
@@ -51,13 +52,14 @@ export class MapEditSelections {
   }
 
   loadData() {
-    return this.mapJukeboxService.getAllJukeboxSelections().then(data => {
+    return this.mapJukeboxService.getAllArchivedJukeboxSelections().then(data => {
       this.mapJukeboxSelections = data;
       });
   }
 
-  archiveSelection(jbselection) {
-    return this.mapJukeboxService.archiveSelection(jbselection.Id);
+  reinstateSelection(request) {
+    console.log(request);
+    return this.mapJukeboxService.reinstateSelection(this.insert_Id,this.insert_JbLetter,this.insert_JbNumberA);
   }
 
   insertSelection(request) {

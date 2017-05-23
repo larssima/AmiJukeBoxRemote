@@ -55,18 +55,33 @@ namespace AmiJukeboxRemote.webapi
             return true;
         }
 
+        [Route("archiveselection")]
+        [HttpPut]
+        public bool ArchiveSelection(JbSelectionModel jbmodel)
+        {
+            if (!_jbDb.ArchiveSelection(jbmodel.Id)) return false;
+            jbmodel.Archived = 1;
+            CreateJbStrip(jbmodel);
+            return true;
+        }
+
+        [Route("reinstateselection")]
+        [HttpPut]
+        public bool ReinstateSelection(JbSelectionModel jbmodel)
+        {
+            CreateJbStrip(jbmodel);
+            return _jbDb.ReinstateSelection(jbmodel);
+        }
+
         [Route("savestrip")]
         [HttpPut]
         public bool SaveStripToDb(JbSelectionModel jbmodel)
         {
             var ok = _jbDb.SaveToDataBase(jbmodel)>-1;
-            if (ok)
-            {
-                jbmodel.ImageStripName = CreateJbStrip(jbmodel);
-                _jbDb.UpdateImagePath(jbmodel);
-                return true;
-            }
-            return false;
+            if (!ok) return false;
+            jbmodel.ImageStripName = CreateJbStrip(jbmodel);
+            _jbDb.UpdateImagePath(jbmodel);
+            return true;
         }
         
         [Route("createstrips")]

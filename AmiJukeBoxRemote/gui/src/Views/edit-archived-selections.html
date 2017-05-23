@@ -1,0 +1,107 @@
+<template>
+    <div class="row">
+        <div class="col-md-12 col-md-12 col-md-12 col-md-12">
+            <div class="panel panel-default ">
+
+                <div class="panel-heading">
+                    Jukebox Selections  
+                    <span class="panel-heading-buttons">
+                <button class="btn btn-info btn-mini" data-toggle="modal" data-target="#new-selection-modal">New</button>
+            </span>
+                </div>
+
+                <div class="panel-body">
+                    <table class="table table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <th>Song A1</th>
+                                <th></th>
+                                <th>Song A2</th>
+                                <th></th>
+                                <th>Song B1</th>
+                                <th></th>
+                                <th>Song B2</th>
+                                <th></th>
+                                <th>Artist 1</th>
+                                <th></th>
+                                <th>Artist 2</th>
+                                <th></th>
+                                <th>Music Cat</th>
+                                <th></th>
+                                <th>Archived</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr repeat.for="jbselection of mapJukeboxSelections" class="pointer">
+                                <td>${jbselection.A1Song}</td>
+                                <td></td>
+                                <td>${jbselection.A2Song}</td>
+                                <td></td>
+                                <td>${jbselection.B1Song}</td>
+                                <td></td>
+                                <td>${jbselection.B2Song}</td>
+                                <td></td>
+                                <td>${jbselection.Artist1}</td>
+                                <td></td>
+                                <td>${jbselection.Artist2}</td>
+                                <td></td>
+                                <td>${jbselection.MusicCategory}</td>
+                                <td></td>
+                                <td>${jbselection.Archived}</td>
+                                <td><button type="button" class="btn btn-xs" style="float: right;background-color: mistyrose"
+                                        click.trigger="deleteSelection(jbselection)">Delete</button></td>
+                                <td><button class="btn btn-xs" style="float: right;background-color: mistyrose" data-toggle="modal" data-id="jbselection.Id" data-target="#new-selection-modal">Restore</button></td>
+<!--
+
+                                <td><button type="button" class="btn btn-xs" style="float: right;background-color: mistyrose"
+                                        click.trigger="reinstateSelection(jbselection)">Restore</button></td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="new-selection-modal" tabindex="-1" role="dialog" aria-labelledby="new-selection-modal">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Set Jukebox Number</h4>
+                </div>
+                <form id="new-selection-form">
+                    <div class="modal-body">
+                        <!--<div><input type="hidden" value="${jbselection.Id}" value.bind="insert_Id"></div>-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="txtJbLetter">Selection Letter</label>
+                                    <input maxlength="1" type="text" class="form-control" value.bind="insert_JbLetter"
+                                        autofocus />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="txtJbNumberA">Selection A Nr</label>
+                                    <input maxlength="2" type="text" class="form-control" value.bind="insert_JbNumberA"
+                                        autofocus />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" click.trigger="reinstateSelection()">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</template>

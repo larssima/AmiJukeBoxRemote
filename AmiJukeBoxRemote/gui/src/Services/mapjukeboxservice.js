@@ -29,6 +29,43 @@ export class MapJukeboxService {
         return this.baseRepo.get('amijukebox/spotifylogin').then(data=> {return data;});
     }
 
+    reinstateSelection(id,jbletter,jbnumbera)
+    {
+        if(jbnumbera<1 || jbnumbera>19 || id<0) return
+        var recordnr = -1
+        if(jbletter='A') recordnr=0
+        if(jbletter='B') recordnr=10
+        if(jbletter='C') recordnr=20
+        if(jbletter='D') recordnr=30
+        if(jbletter='E') recordnr=40
+        if(jbletter='F') recordnr=50
+        if(jbletter='G') recordnr=60
+        if(jbletter='H') recordnr=70
+        if(jbletter='J') recordnr=80
+        if(jbletter='K') recordnr=90
+        if(recordnr==-1 || !this.isOdd(recordnr)) return
+        var num = (jbnumbera + 1) / 2
+        recordnr = recordnr + num
+        let data = {
+            Id: id,
+            JbLetter: jbletter,
+            JbNumberA: jbnumbera,
+            JbNumberB: jbnumbera+1,
+            JbNumeric: recordnr
+        }
+        return this.baseRepo.put('amijukebox/reinstaterecord',data)
+    }
+
+    isOdd(num) { return num % 2;}
+
+    archiveSelection(id)
+    {
+        let data = {
+            Id: id
+        }
+        return this.baseRepo.put('amijukebox/archiveselection',data)
+    }
+
     playSongOnSpotify(artist,songtitle,que)
     {
         let data = {

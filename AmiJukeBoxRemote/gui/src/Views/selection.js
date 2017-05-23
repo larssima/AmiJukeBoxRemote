@@ -33,19 +33,30 @@ export class Welcome {
   
 
 
-  handleHold($event) {
+  handleHold($event,jbselection) {
     var _this = this;
-    this.dialogService.open({ viewModel: ConfirmDialog, model: { value: "Are you sure you want to cancel record?" } }).then(function (response) {
-      if (!response.wasCancelled) {
-        _this.Cancel().then((activity) => {
-          _this.loadData()
-        });
-      }
-    });
+    this.jbLetter = jbselection.JbLetter;
+    this.jbNumberA = jbselection.JbNumberA;
+    $('#admin-jukebox-modal').modal('show');
+    // this.dialogService.open({ viewModel: ConfirmDialog, model: { value: "Are you sure you want to cancel record?" } }).then(function (response) {
+    //   if (!response.wasCancelled) {
+    //     _this.Cancel().then((activity) => {
+    //       _this.loadData()
+    //     });
+    //   }
+    // });
+  }
+
+  openPlaySongDlg(jbselection) {
+    this.jbLetter = jbselection.JbLetter;
+    this.jbNumberA = jbselection.JbNumberA;
+    this.jbNumberB = jbselection.JbNumberB;
+    this.selectedA = jbselection.A1Song;
+    this.selectedB = jbselection.B1Song;    
+    $('#play-jukebox-modal').modal('show');
   }
 
   handlePress($event,jbselection) {
-    var _this = this;
     this.jbLetter = jbselection.JbLetter;
     this.jbNumberA = jbselection.JbNumberA;
     this.jbNumberB = jbselection.JbNumberB;

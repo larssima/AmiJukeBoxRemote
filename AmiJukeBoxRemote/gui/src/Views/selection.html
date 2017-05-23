@@ -9,11 +9,11 @@
             <!--<div repeat.for="i of 10"><img src="../../assets/images/jukecard-orange-300x100.png" style="float: left; margin-right: 2px;" /></div>
              <p style="clear: both;">-->
             <div repeat.for="jbselection of mapJukeboxSelections" class="pointer">
-              <div hammer-press.call="handlePress($event,jbselection)">
+              <!--<div hammer-press.call="handleHold($event,jbselection)">-->
                 <!--<div hammer-hold.call="handleHold($event)">-->
-                  <img src="${getImagePath(jbselection)}"  style="float: left; margin-right: 2px;"/>
+                  <img src="${getImagePath(jbselection)}"  click.trigger="openPlaySongDlg(jbselection)" style="float: left; margin-right: 2px;"/>
                 <!--</div>-->
-              </div>
+              <!--</div>-->
             </div>
              <p style="clear: both;">
             <!--<div repeat.for="i of 10"><img src="../../assets/images/jukecard-lightgreen-300x100-v2.png" style="float: left; margin-right: 2px;" /></div>-->
@@ -53,6 +53,32 @@
               </div>
           </div>
       </div>
+
+      <!--<div class="modal fade" id="admin-jukebox-modal" tabindex="-1" role="dialog" aria-labelledby="admin-jukebox-modal">
+          <div class="modal-dialog modal-sm" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Handle Strip</h4>
+                  </div>
+                  <form id="admin-jukebox-form">
+                      <div class="modal-body">
+
+                          <div class="row">
+                            <div class="col-xs-6">
+                              <button click.trigger="archiveJukeboxStrip(jbselection)" class="btn btn-info btn-lg">
+                                <p><i class=""></i> Archive ${jbLetter+jbNumberA}?</p>
+                              </a>        
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="modal-footer">
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>-->
       
   </section>
 </template>
