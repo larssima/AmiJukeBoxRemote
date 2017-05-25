@@ -17,8 +17,11 @@ using Json = System.Web.Helpers.Json;
 
 namespace AmiJukeBoxRemote.Spotify
 {
+
     public class SpotifyInterface
     {
+        private PlayList _playList = new PlayList();
+        private SpotifyLocalAPI _spotify = new SpotifyLocalAPI();
         public SpotifyInterface()
         {
             LoginToSpotify();
@@ -37,7 +40,7 @@ namespace AmiJukeBoxRemote.Spotify
             {
                 //This will open the user's browser and returns once
                 //the user is authorized.
-                var _spotify = await webApiFactory.GetWebApi();
+                var _spotifyWeb = await webApiFactory.GetWebApi();
             }
             catch (Exception ex)
             {
@@ -51,9 +54,9 @@ namespace AmiJukeBoxRemote.Spotify
             var trackList = GetTrackList(artistName, songTitle, que);
             if (trackList.tracks.items.Count > 0)
             {
-                var spotify = new SpotifyLocalAPI();
-                spotify.Connect();
-                await spotify.PlayURL(trackList.tracks.items[0].uri);
+                _spotify.Connect();
+                _spotify.ListenForEvents = true;
+                await _spotify.PlayURL(trackList.tracks.items[0].uri);
                 return true;
             }
             return false;
@@ -81,6 +84,16 @@ namespace AmiJukeBoxRemote.Spotify
             client.Encoding = Encoding.UTF8;
             client.Headers.Add("Accept", "application/json");
             return client;
+        }
+
+
+        public class PlayList : List<string>
+        {
+            public void AddSong(string uri)
+            {
+                Add(uri);
+            }
+
         }
 
 

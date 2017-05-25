@@ -47,13 +47,33 @@ export class Welcome {
     // });
   }
 
-  openPlaySongDlg(jbselection) {
+  openPlaySongDlg($event,jbselection) {
+    
+    if($event.offsetY<=50)
+    {
+       toastr.success(jbselection.A1Song+" ["+jbselection.JbLetter+jbselection.JbNumberA+"] selected!");
+    }
+    if($event.offsetY>50)
+    {
+       toastr.success(jbselection.B1Song+" ["+jbselection.JbLetter+jbselection.JbNumberB+"] selected!");
+    }
     this.jbLetter = jbselection.JbLetter;
     this.jbNumberA = jbselection.JbNumberA;
     this.jbNumberB = jbselection.JbNumberB;
     this.selectedA = jbselection.A1Song;
     this.selectedB = jbselection.B1Song;    
-    $('#play-jukebox-modal').modal('show');
+    // $('#play-jukebox-modal').modal('show');
+  }
+
+  getMapName(jbselection,num)
+  {
+    if(num==1) return "map" + jbselection.Id + "A";
+    if(num==2) return "map" + jbselection.Id + "B";
+  }
+
+  getUseMapName(jbselection)
+  {
+    return "map" + jbselection.Id + "A";
   }
 
   handlePress($event,jbselection) {
