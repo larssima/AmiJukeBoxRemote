@@ -60,8 +60,10 @@ namespace AmiJukeboxRemote.webapi
         public bool ArchiveSelection(JbSelectionModel jbmodel)
         {
             if (!_jbDb.ArchiveSelection(jbmodel.Id)) return false;
-            jbmodel.Archived = 1;
-            CreateJbStrip(jbmodel);
+            CreateAllStrips();
+            //var alljbmodel = _jbDb.GetJbSelection(jbmodel.Id);
+            //CreateJbStrip(alljbmodel);
+            //_jbDb.UpdateImagePath(alljbmodel);
             return true;
         }
 
@@ -69,8 +71,9 @@ namespace AmiJukeboxRemote.webapi
         [HttpPut]
         public bool ReinstateSelection(JbSelectionModel jbmodel)
         {
-            CreateJbStrip(jbmodel);
-            return _jbDb.ReinstateSelection(jbmodel);
+            var ok = _jbDb.ReinstateSelection(jbmodel);
+            CreateAllStrips();
+            return ok;
         }
 
         [Route("savestrip")]

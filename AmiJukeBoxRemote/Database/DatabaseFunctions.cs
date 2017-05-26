@@ -126,6 +126,17 @@ namespace AmiJukeBoxRemote.Database
             return true;
         }
 
+        public JbSelectionModel GetJbSelection(int jbmodelId)
+        {
+            using (IDbConnection db = new MySqlConnection(ConfigurationManager.ConnectionStrings["JukeboxDatabase"].ConnectionString))
+
+            {
+
+                return db.Query<JbSelectionModel>("SELECT * FROM amijukebox.jbselection WHERE Id=@Id", new { Id = jbmodelId }).FirstOrDefault();
+            }
+        }
+    
+
         public bool ArchiveSelection(int jbmodelId)
         {
             try
@@ -163,7 +174,7 @@ namespace AmiJukeBoxRemote.Database
 
                     db.Open();
 
-                    string sqlQuery = "Update amijukebox.jbselection Set JbLetter = @jbletter, JbNumberA = @jbnumbera, JbNumberB = @jbnumberb, JbNumeric = @jbnumeric, Archived = 0 Where Id = @Id";
+                    string sqlQuery = "Update amijukebox.jbselection Set JbLetter = @jbletter, JbNumberA = @jbnumbera, JbNumberB = @jbnumberb, JbNumeric = @jbnumeric, Archived = @archived Where Id = @Id";
                     db.Execute(sqlQuery,
                         new
                         {
@@ -171,6 +182,7 @@ namespace AmiJukeBoxRemote.Database
                             jbmodel.JbNumberA,
                             jbmodel.JbNumberB,
                             jbmodel.JbNumeric,
+                            jbmodel.Archived,
                             jbmodel.Id
                         });
 

@@ -47,6 +47,29 @@ export class Welcome {
     // });
   }
 
+  isOdd(num) { return num % 2;}
+
+  randomsong()
+  {
+    var count = this.mapJukeboxSelections.length*2;
+    var random = Math.floor((Math.random() * count) + 1);
+    var aside = false;
+    if(this.isOdd(random)){
+      aside = true;
+      random = random + 1;
+    }
+    var recordnr = random/2;
+    var sel = this.mapJukeboxSelections[recordnr-1];                                                           
+    if(aside)
+    {
+       toastr.success(sel.A1Song+" ["+sel.JbLetter+sel.JbNumberA+"] selected!");
+    }
+    else
+    {
+       toastr.success(sel.B1Song+" ["+sel.JbLetter+sel.JbNumberB+"] selected!");
+    }
+  }
+
   openPlaySongDlg($event,jbselection) {
     
     if($event.offsetY<=50)

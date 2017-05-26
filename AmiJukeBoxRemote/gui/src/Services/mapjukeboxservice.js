@@ -29,41 +29,51 @@ export class MapJukeboxService {
         return this.baseRepo.get('amijukebox/spotifylogin').then(data=> {return data;});
     }
 
-    reinstateSelection(id,jbletter,jbnumbera)
+    reinstateSelection(jbsel,jbletter,jbnumbera)
     {
-        if(jbnumbera<1 || jbnumbera>19 || id<0) return
+        var numba = parseInt(jbnumbera);
+        if(jbnumbera<1 || jbnumbera>19 || jbsel.Id<0) return
         var recordnr = -1
-        if(jbletter='A') recordnr=0
-        if(jbletter='B') recordnr=10
-        if(jbletter='C') recordnr=20
-        if(jbletter='D') recordnr=30
-        if(jbletter='E') recordnr=40
-        if(jbletter='F') recordnr=50
-        if(jbletter='G') recordnr=60
-        if(jbletter='H') recordnr=70
-        if(jbletter='J') recordnr=80
-        if(jbletter='K') recordnr=90
-        if(recordnr==-1 || !this.isOdd(recordnr)) return
-        var num = (jbnumbera + 1) / 2
+        if(jbletter=='A') recordnr=0
+        if(jbletter=='B') recordnr=10
+        if(jbletter=='C') recordnr=20
+        if(jbletter=='D') recordnr=30
+        if(jbletter=='E') recordnr=40
+        if(jbletter=='F') recordnr=50
+        if(jbletter=='G') recordnr=60
+        if(jbletter=='H') recordnr=70
+        if(jbletter=='J') recordnr=80
+        if(jbletter=='K') recordnr=90
+        if(recordnr==-1 || !this.isOdd(numba)) return
+        var num = (numba + 1) / 2
         recordnr = recordnr + num
-        let data = {
-            Id: id,
+        let indata = {
+            Id: jbsel.Id,
             JbLetter: jbletter,
             JbNumberA: jbnumbera,
-            JbNumberB: jbnumbera+1,
-            JbNumeric: recordnr
-        }
-        return this.baseRepo.put('amijukebox/reinstaterecord',data)
+            JbNumberB: String(numba+1),
+            JbNumeric: recordnr,
+            A1Song: jbsel.A1Song,
+            A2Song: jbsel.A2Song,
+            B1Song: jbsel.B1Song,
+            B2Song: jbsel.B2Song,
+            Artist1: jbsel.Artist1,
+            Artist2: jbsel.Artist2,
+            ImageStripTemplate: jbsel.ImageStripTemplate,
+            MusicCategory: jbsel.MusicCategory,
+            Archived: 0
+        };        
+        return this.baseRepo.put('amijukebox/reinstateselection',indata).then(data=> {return data;});
     }
 
     isOdd(num) { return num % 2;}
 
     archiveSelection(id)
     {
-        let data = {
+        let indata = {
             Id: id
         }
-        return this.baseRepo.put('amijukebox/archiveselection',data)
+        return this.baseRepo.put('amijukebox/archiveselection',indata).then(data => {return data;});
     }
 
     playSongOnSpotify(artist,songtitle,que)

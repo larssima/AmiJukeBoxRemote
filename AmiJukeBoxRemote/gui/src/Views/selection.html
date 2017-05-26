@@ -3,6 +3,13 @@
   
   <section class="au-animate">
     <h2>${heading}</h2>
+      <div class="row">
+        <div class="col-xs-12">
+          <a class="btn btn-primary btn-responsive" click.delegate="randomsong()" style="margin-left: 12px;">
+            <i class="fa fa-random"></i>
+          </a>
+        </div>
+      </div>     
       <div class="row" style="margin-left: 12px">
         <div repeat.for="jbselection of mapJukeboxSelections" class="pointer">
           <!--<div hammer-press.call="handleHold($event,jbselection)">-->

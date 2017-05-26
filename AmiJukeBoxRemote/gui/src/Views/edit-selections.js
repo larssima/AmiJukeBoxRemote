@@ -57,7 +57,9 @@ export class MapEditSelections {
   }
 
   archiveSelection(jbselection) {
-    return this.mapJukeboxService.archiveSelection(jbselection.Id);
+    return this.mapJukeboxService.archiveSelection(jbselection.Id).then(data => {
+      this.loadData();
+    });
   }
 
   insertSelection(request) {

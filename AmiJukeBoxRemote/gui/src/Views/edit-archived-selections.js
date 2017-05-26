@@ -3,6 +3,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { MapJukeboxService } from '../services/mapjukeboxservice';
 import { DialogService } from 'aurelia-dialog';
 import { ConfirmDialog } from '../Components/confirmation-dialog';
+import { RestoreSelection } from './restore-selection';
 import * as toastr from 'toastr';
 
 
@@ -57,10 +58,25 @@ export class MapEditSelections {
       });
   }
 
-  reinstateSelection(request) {
-    console.log(request);
-    return this.mapJukeboxService.reinstateSelection(this.insert_Id,this.insert_JbLetter,this.insert_JbNumberA);
+  reinstateSelection(jbsel) {
+    console.log(jbsel);
+    return this.mapJukeboxService.reinstateSelection(jbsel,jbsel.JbLetter,jbsel.JbNumberA);
   }
+
+  editSelection(jbselectiontoedit) {
+    var editselection = Object.assign({}, jbselectiontoedit);
+
+    this.dialogService.open({ viewModel: RestoreSelection, model: { jbselection: editselection, title: 'Restore Archived Selection' } }).then(response => {
+        if (!response.wasCancelled) {
+            if (response.output.save) {
+                this.reinstateSelection(response.output.jbselection).then(() => {
+                    toastr.success('Selection reinstated');
+                    this.loadData();
+                });
+            }           
+        }
+    });
+  }  
 
   insertSelection(request) {
     console.log(request);
