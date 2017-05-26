@@ -9,16 +9,15 @@
       </div> 
       <div class="row" style="margin-left: 12px">
             <div repeat.for="jbselection of mapJukeboxSelections" class="pointer">
-              <div hammer-press.call="handlePress($event,jbselection)">
-                  <img src="${getImagePath(jbselection)}"  style="float: left; margin-right: 2px;"/>
-              </div>
+              <!--<div hammer-press.call="handlePress($event,jbselection)">-->
+                  <img src="${getImagePath(jbselection)}" click.trigger="openPlaySongDlg($event,jbselection)" style="float: left; margin-right: 2px;"/>
+              <!--</div>-->
             </div>
              <p style="clear: both;">
-            <!--<div repeat.for="i of 10"><img src="../../assets/images/jukecard-lightgreen-300x100-v2.png" style="float: left; margin-right: 2px;" /></div>-->
             
       </div>
 
-      <div class="modal fade" id="play-spotify-modal" tabindex="-1" role="dialog" aria-labelledby="play-spotify-modal">
+      <!--<div class="modal fade" id="play-spotify-modal" tabindex="-1" role="dialog" aria-labelledby="play-spotify-modal">
           <div class="modal-dialog modal-sm" role="document">
               <div class="modal-content">
                   <div class="modal-header">
@@ -56,7 +55,7 @@
                   </form>
               </div>
           </div>
-      </div>
+      </div>-->
       
   </section>
 </template>

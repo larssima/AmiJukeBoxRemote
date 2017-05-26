@@ -80,12 +80,12 @@ export class MapEditSelections {
 
   insertSelection(request) {
     console.log(request);
-    if (this.insert_JbLetter=='' || this.insert_JbNumberA=='' || this.insert_JbNumberB==''|| this.insert_JbNumeric=='' || this.insert_A1Song=='' || this.insert_B1Song=='' || this.insert_Artist1=='') return;
+    if (this.insert_A1Song=='' || this.insert_B1Song=='' || this.insert_Artist1=='') return;
     if(this.insert_ImageStripTemplate=='') { this.insert_ImageStripTemplate == 'jukecard-lightgreen-300x100.png'}
-    this.mapJukeboxService.insertSelection(this.insert_JbLetter,
-                                                  this.insert_JbNumberA,
-                                                  this.insert_JbNumberB,
-                                                  this.insert_JbNumeric,
+    this.mapJukeboxService.insertSelection("X",
+                                           "99",
+                                           "99",
+                                            999,
                                                   this.insert_A1Song,
                                                   this.insert_A2Song,
                                                   this.insert_B1Song,
@@ -94,7 +94,7 @@ export class MapEditSelections {
                                                   this.insert_Artist2,
                                                   this.insert_ImageStripTemplate,
                                                   this.insert_MusicCategory,
-                                                  this.Insert_Archived).then((request) => {
+                                                  1).then((request) => {
         this.loadData()
         this.insert_JbLetter ='';
         this.insert_JbNumberA ='';
@@ -107,7 +107,7 @@ export class MapEditSelections {
         this.insert_Artist1 ='';
         this.insert_Artist2 ='';
         this.insert_MusicCategory ='';
-        this.Insert_Archived
+        this.Insert_Archived = 0;
         $('#new-selection-modal').modal('hide');
      });
   }

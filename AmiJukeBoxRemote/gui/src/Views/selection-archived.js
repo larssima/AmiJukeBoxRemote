@@ -56,6 +56,19 @@ export class Welcome {
     })
   }
 
+  openPlaySongDlg($event,jbselection) {
+    if($event.offsetY<=50)
+    {
+       toastr.success(jbselection.A1Song +" selected!");
+       this.playSongOnSpotify(jbselection.Artist1,jbselection.A1Song,1);
+    }
+    if($event.offsetY>50)
+    {
+       toastr.success(jbselection.B1Song +" selected!");
+       this.playSongOnSpotify(jbselection.Artist1,jbselection.B1Song,1);
+    }
+  }
+
   attached() {
     return this.loadData();
   }
