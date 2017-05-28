@@ -13,7 +13,7 @@ namespace AmiJukeBoxRemote.Mqtt
     {
         public void SendCancelToSubscriber()
         {
-            var mqttClient = new MqttClient(IPAddress.Parse("192.168.0.110"));
+            var mqttClient = new MqttClient(IPAddress.Parse("192.168.0.134"));
             string clientId = Guid.NewGuid().ToString();
             mqttClient.Connect(clientId);
             mqttClient.Publish("amiJukebox", Encoding.UTF8.GetBytes("cancel record"),
