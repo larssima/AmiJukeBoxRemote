@@ -137,11 +137,6 @@ export class Welcome {
     alert(`Welcome, ${this.fullName}!`);
   }
 
-  cancel()
-  {
-    return this.mapJukeboxService.cancelRecord();
-  }
-
   canDeactivate() {
     /*
     if (this.fullName !== this.previousValue) {

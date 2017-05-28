@@ -22,7 +22,11 @@ export class Welcome {
   }
   
 
-
+  cancel()
+  {
+    return this.mapJukeboxService.cancelRecord();
+  }
+  
   handleHold($event) {
     var _this = this;
     this.dialogService.open({ viewModel: ConfirmDialog, model: { value: "Are you sure you want to cancel record?" } }).then(function (response) {
