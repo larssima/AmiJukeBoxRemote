@@ -92,7 +92,7 @@ export class MapJukeboxService {
             JbLetter: jbLetter,
             JbNumber: jbNumber
         }
-        return this.baseRepo.get('amijukebox/playsongonjukebox',data)
+        return this.baseRepo.put('amijukebox/playsongonjukebox',data)
     }
 
     insertSelection(jbletter,jbnumberA,jbnumberB,jbnumeric,a1song,a2song,b1song,b2song,artist1,artist2,imagestriptemplate,musiccategory,archived){

@@ -74,10 +74,12 @@ export class Welcome {
     
     if($event.offsetY<=50)
     {
+       this.playSongOnJukebox(jbselection.JbLetter,jbselection.JbNumberA);
        toastr.success(jbselection.A1Song+" ["+jbselection.JbLetter+jbselection.JbNumberA+"] selected!");
     }
     if($event.offsetY>50)
     {
+       this.playSongOnJukebox(jbselection.JbLetter,jbselection.JbNumberB);
        toastr.success(jbselection.B1Song+" ["+jbselection.JbLetter+jbselection.JbNumberB+"] selected!");
     }
     this.jbLetter = jbselection.JbLetter;

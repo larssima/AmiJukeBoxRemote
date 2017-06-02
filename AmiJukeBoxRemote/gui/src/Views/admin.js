@@ -22,7 +22,7 @@ export class Welcome {
   }
   
 
-  cancel()
+  cancelRecord()
   {
     return this.mapJukeboxService.cancelRecord();
   }

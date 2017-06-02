@@ -52,6 +52,7 @@ namespace AmiJukeboxRemote.webapi
         [HttpPut]
         public bool PlaySongOnJukebox(JukeboxModel jukeboxmodel)
         {
+            _mqtt.PlaySelectionOnJukebox(jukeboxmodel);
             return true;
         }
 
