@@ -7,22 +7,10 @@ first = 1
 gap = 1
 second = 1
 
-# D Letter
-firstCount = 5
-
-firstSleepTimeOn = 0.02
-firstSleepTimeOff = 0.04
-
-secondSleepTimeOn = 0.04
-secondSleepTimeOff = 0.06
-
-gapSleepTime = 0.2
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(pin,GPIO.OUT)
-
 def play(nra):
-
+	
+	# D Letter
+	firstCount = 5
 	secondCount = nra
 
 	pin = 17

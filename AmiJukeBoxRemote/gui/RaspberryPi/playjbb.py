@@ -2,29 +2,11 @@
 import RPi.GPIO as GPIO 
 import time 
 
-pin = 17
-first = 1
-gap = 1
-second = 1
-
-# B Letter
-firstCount = 3
-
-firstSleepTimeOn = 0.02
-firstSleepTimeOff = 0.04
-
-secondSleepTimeOn = 0.04
-secondSleepTimeOff = 0.06
-
-gapSleepTime = 0.2
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(pin,GPIO.OUT)
-
-
 
 def play(nra):
 
+	# B Letter
+	firstCount = 3
 	secondCount = nra
 
 	pin = 17
@@ -35,10 +17,10 @@ def play(nra):
 	firstSleepTimeOn = 0.02
 	firstSleepTimeOff = 0.04
 
-	secondSleepTimeOn = 0.02
-	secondSleepTimeOff = 0.04
+	secondSleepTimeOn = 0.04
+	secondSleepTimeOff = 0.06
 
-	gapSleepTime = 0.1
+	gapSleepTime = 0.2
 
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setup(pin,GPIO.OUT)

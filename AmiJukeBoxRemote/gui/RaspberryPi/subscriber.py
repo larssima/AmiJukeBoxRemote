@@ -197,7 +197,7 @@ def on_message(mosq, obj, msg):
                 playjbc.play(13)
                 print "Playing C13"
         elif msg.payload.decode() == "C14":
-                playjbb.play(14)
+                playjbc.play(14)
                 print "Playing C14"
         elif msg.payload.decode() == "C15":
                 playjbc.play(15)
@@ -257,7 +257,7 @@ def on_message(mosq, obj, msg):
                 playjbd.play(13)
                 print "Playing D13"
         elif msg.payload.decode() == "D14":
-                playjbb.play(14)
+                playjbd.play(14)
                 print "Playing D14"
         elif msg.payload.decode() == "D15":
                 playjbd.play(15)
@@ -317,7 +317,7 @@ def on_message(mosq, obj, msg):
                 playjbe.play(13)
                 print "Playing E13"
         elif msg.payload.decode() == "E14":
-                playjbb.play(14)
+                playjbe.play(14)
                 print "Playing E14"
         elif msg.payload.decode() == "E15":
                 playjbe.play(15)
@@ -354,7 +354,7 @@ def on_message(mosq, obj, msg):
                 print "Playing F5"
         elif msg.payload.decode() == "F6":
                 playjbf.play(6)
-                print "Playing B6"
+                print "Playing F6"
         elif msg.payload.decode() == "F7":
                 playjbf.play(7)
                 print "Playing F7"
@@ -377,7 +377,7 @@ def on_message(mosq, obj, msg):
                 playjbf.play(13)
                 print "Playing F13"
         elif msg.payload.decode() == "F14":
-                playjbb.play(14)
+                playjbf.play(14)
                 print "Playing F14"
         elif msg.payload.decode() == "F15":
                 playjbf.play(15)
@@ -437,7 +437,7 @@ def on_message(mosq, obj, msg):
                 playjbg.play(13)
                 print "Playing G13"
         elif msg.payload.decode() == "G14":
-                playjbb.play(14)
+                playjbg.play(14)
                 print "Playing G14"
         elif msg.payload.decode() == "G15":
                 playjbg.play(15)
@@ -497,7 +497,7 @@ def on_message(mosq, obj, msg):
                 playjbh.play(13)
                 print "Playing H13"
         elif msg.payload.decode() == "H14":
-                playjbb.play(14)
+                playjbh.play(14)
                 print "Playing H14"
         elif msg.payload.decode() == "H15":
                 playjbh.play(15)
@@ -557,7 +557,7 @@ def on_message(mosq, obj, msg):
                 playjbj.play(13)
                 print "Playing J13"
         elif msg.payload.decode() == "J14":
-                playjbb.play(14)
+                playjbj.play(14)
                 print "Playing J14"
         elif msg.payload.decode() == "J15":
                 playjbj.play(15)
@@ -617,7 +617,7 @@ def on_message(mosq, obj, msg):
                 playjbk.play(13)
                 print "Playing K13"
         elif msg.payload.decode() == "K14":
-                playjbb.play(14)
+                playjbk.play(14)
                 print "Playing K14"
         elif msg.payload.decode() == "K15":
                 playjbk.play(15)
