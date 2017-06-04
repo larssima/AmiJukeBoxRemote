@@ -3,6 +3,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { MapJukeboxService } from '../services/mapjukeboxservice';
 import { DialogService } from 'aurelia-dialog';
 import { ConfirmDialog } from '../Components/confirmation-dialog';
+import { FilterValueConverter } from '../Components/filter-value-converter';
 import * as toastr from 'toastr';
 
 @inject(MapJukeboxService, EventAggregator, DialogService, ConfirmDialog, ObserverLocator)
@@ -31,7 +32,14 @@ export class Welcome {
     this.jbNumberB = "";
   }
   
-
+  filterFunc(searchExpression, value){
+     
+     let itemValue = value.A1Song+value.B1Song+value.Artist1+value.Artist2;
+     if(!searchExpression || !itemValue) return false;
+     
+     return itemValue.toUpperCase().indexOf(searchExpression.toUpperCase()) !== -1;
+     
+  }
 
   handleHold($event,jbselection) {
     var _this = this;
@@ -62,12 +70,12 @@ export class Welcome {
     var sel = this.mapJukeboxSelections[recordnr-1];                                                           
     if(aside)
     {
-       this.playSongOnJukebox(jbselection.JbLetter,jbselection.JbNumberA);
+       this.playSongOnJukebox(sel.JbLetter,sel.JbNumberA);
        toastr.success(sel.A1Song+" ["+sel.JbLetter+sel.JbNumberA+"] selected!");
     }
     else
     {
-       this.playSongOnJukebox(jbselection.JbLetter,jbselection.JbNumberB);
+       this.playSongOnJukebox(sel.JbLetter,sel.JbNumberB);
        toastr.success(sel.B1Song+" ["+sel.JbLetter+sel.JbNumberB+"] selected!");
     }
   }
