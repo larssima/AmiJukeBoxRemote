@@ -62,10 +62,12 @@ export class Welcome {
     var sel = this.mapJukeboxSelections[recordnr-1];                                                           
     if(aside)
     {
+       this.playSongOnJukebox(jbselection.JbLetter,jbselection.JbNumberA);
        toastr.success(sel.A1Song+" ["+sel.JbLetter+sel.JbNumberA+"] selected!");
     }
     else
     {
+       this.playSongOnJukebox(jbselection.JbLetter,jbselection.JbNumberB);
        toastr.success(sel.B1Song+" ["+sel.JbLetter+sel.JbNumberB+"] selected!");
     }
   }

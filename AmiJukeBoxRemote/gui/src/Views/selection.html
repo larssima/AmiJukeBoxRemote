@@ -4,10 +4,15 @@
   <section class="au-animate">
     <h2>${heading}</h2>
       <div class="row">
-        <div class="col-xs-12">
-          <a class="btn btn-primary btn-responsive" click.delegate="randomsong()" style="margin-left: 12px;">
-            <i class="fa fa-random"></i>
+        <div class="col-md-1">
+          <a class="btn btn-primary btn-responsive" click.delegate="randomsong()" style="font-size:16px;margin-left: 12px;margin-bottom: 8px">
+             <i class="fa fa-random fa-2x"></i>
           </a>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+             <input type="text" class="form-control" name="searchFilter" value.bind="searchFilter" />
+          </div>        
         </div>
       </div>     
       <div class="row" style="margin-left: 12px">
