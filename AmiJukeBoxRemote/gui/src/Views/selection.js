@@ -17,6 +17,7 @@ export class Welcome {
     this.mapJukeboxService = mapJukeboxService;
     this.dialogService = dialogService;
     this.mapJukeboxSelections = [];
+    this.mapJukeboxPrintSel = [];
     this.choosemessage = "Test";
     this.ea = eventAggregator;
     this.dateFrom = '';
@@ -30,22 +31,28 @@ export class Welcome {
     this.jbLetter = "";
     this.jbNumberA = "";
     this.jbNumberB = "";
+    this.onlyaside = false;
   }
   
   filterFunc(searchExpression, value){
      
-     let itemValue = value.A1Song+value.B1Song+value.Artist1+value.Artist2;
+     let itemValue = value.A1Song+" "+value.B1Song+" "+value.Artist1+" "+value.Artist2;
      if(!searchExpression || !itemValue) return false;
      
      return itemValue.toUpperCase().indexOf(searchExpression.toUpperCase()) !== -1;
      
   }
 
+  printdlg()
+  {
+    this.mapJukeboxPrintSel = 
+    $('#play-jukebox-modal').modal('show');
+  }
+
   handleHold($event,jbselection) {
     var _this = this;
-    this.jbLetter = jbselection.JbLetter;
-    this.jbNumberA = jbselection.JbNumberA;
     $('#admin-jukebox-modal').modal('show');
+    jbselection.SelectedForPrint = true;
     // this.dialogService.open({ viewModel: ConfirmDialog, model: { value: "Are you sure you want to cancel record?" } }).then(function (response) {
     //   if (!response.wasCancelled) {
     //     _this.Cancel().then((activity) => {
@@ -68,6 +75,10 @@ export class Welcome {
     }
     var recordnr = random/2;
     var sel = this.mapJukeboxSelections[recordnr-1];                                                           
+    if(this.onlyaside)
+    {
+        aside=true;
+    }
     if(aside)
     {
        this.playSongOnJukebox(sel.JbLetter,sel.JbNumberA);

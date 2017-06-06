@@ -267,9 +267,6 @@
     <Content Include="gui\dist\Infrastructure\sort.js" />
     <Content Include="gui\dist\main.js" />
     <Content Include="gui\dist\nav-bar.html" />
-    <Content Include="gui\dist\Services\mapidpsactivitiesservice.js" />
-    <Content Include="gui\dist\Views\import.html" />
-    <Content Include="gui\dist\Views\import.js" />
     <Content Include="gui\favicon.ico" />
     <Content Include="gui\gulpfile.js" />
     <Content Include="gui\index.html" />
@@ -292,13 +289,6 @@
     <Content Include="gui\src\Infrastructure\sort.js" />
     <Content Include="gui\src\main.js" />
     <Content Include="gui\src\nav-bar.html" />
-    <Content Include="gui\src\Resources\Images\jukecard-green-300x100.png" />
-    <Content Include="gui\src\Resources\Images\jukecard-lightgreen-300x100-v2.png" />
-    <Content Include="gui\src\Resources\Images\jukecard-lightgreen-300x100.png" />
-    <Content Include="gui\src\Resources\Images\jukecard-orange-300x100.png" />
-    <Content Include="gui\src\Services\mapidpsactivitiesservice.js" />
-    <Content Include="gui\src\Views\import.html" />
-    <Content Include="gui\src\Views\import.js" />
     <Content Include="gui\styles\styles.css" />
     <Content Include="gui\test\e2e\src\demo.spec.js" />
     <Content Include="gui\test\e2e\src\skeleton.po.js" />
@@ -314,6 +304,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="app.manifest" />
+    <None Include="Properties\PublishProfiles\KnasenJukebox.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -369,8 +360,6 @@
     <Content Include="gui\dist\Infrastructure\search-table.js.map" />
     <Content Include="gui\dist\Infrastructure\sort.js.map" />
     <Content Include="gui\dist\main.js.map" />
-    <Content Include="gui\dist\Services\mapidpsactivitiesservice.js.map" />
-    <Content Include="gui\dist\Views\import.js.map" />
     <Content Include="gui\src\.eslintrc.json" />
     <Content Include="gui\test\unit\.eslintrc" />
     <Content Include="gui\jsconfig.json" />

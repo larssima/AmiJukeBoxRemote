@@ -22,5 +22,8 @@ namespace AmiJukeBoxRemote.Models
         public string MusicCategory { get; set; }
         public int Archived { get; set; }
         public string ImageStripTemplate { get; set; }
+        
+        // Local class variable
+        public bool SelectedForPrint { get; set; } = false;
     }
 }

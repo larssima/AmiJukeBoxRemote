@@ -7,85 +7,59 @@
       <div class="row">
         <div class="col-md-1">
           <a class="btn btn-primary btn-responsive" click.delegate="randomsong()" style="font-size:16px;margin-left: 12px;margin-bottom: 8px">
-             <i class="fa fa-random fa-2x"></i>
+            <i class="fa fa-random fa-2x"></i>
           </a>
         </div>
+        <div class="col-md-2">
+          <div class="checkbox">
+                <label style="font-size: 1.5em">
+                    <input type="checkbox" checked.bind="onlyaside" >
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    A-Sides
+                </label>
+          </div>
+        </div>
+        <!--<div class="col-md-1">
+          <a class="btn btn-primary btn-responsive" click.delegate="printdlg()" style="font-size:16px;margin-bottom: 8px">
+             Print 
+          </a>
+        </div>-->
+       </div>
+      <div class="row"> 
         <div class="col-md-4">
           <div class="form-group">
-             <input type="text" class="form-control" name="searchFilter" value.bind="searchFilter" placeholder="search..." ></input>
+             <input type="text" class="form-control" name="searchFilter" value.bind="searchFilter" placeholder="search..." style="font-size:16px;margin-left: 12px;margin-bottom: 8px"></input>
           </div>        
         </div>
       </div>     
       <div class="row" style="margin-left: 12px">
         <div repeat.for="jbselection of mapJukeboxSelections | filter:searchFilter:filterFunc" class="pointer">
           <!--<div hammer-press.call="handleHold($event,jbselection)">-->
-            <!--<div hammer-hold.call="handleHold($event)">-->
+            <div hammer-hold.call="handleHold($event,jbselection)">
               <img src="${getImagePath(jbselection)}" click.trigger="openPlaySongDlg($event,jbselection)" style="float: left; margin-right: 2px;"/>
-            <!--</div>-->
+            </div>
           <!--</div>-->
         </div>
         <p style="clear: both;">
       </div>
 
       <div class="modal fade" id="play-jukebox-modal" tabindex="-1" role="dialog" aria-labelledby="play-jukebox-modal">
-          <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                   <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title">Play Song</h4>
+                      <h4 class="modal-title">Print Strips</h4>
                   </div>
                   <form id="play-jukebox-form">
                       <div class="modal-body">
-
-                          <div class="row">
-                            <div class="col-xs-6">
-                              <button click.trigger="playSongOnJukebox(jbLetter,jbNumberA)" class="btn btn-info btn-lg">
-                                <p><i class="fa fa-play-circle"></i> ${selectedA}</p>
-                              </a>        
-                            </div>
-                          </div>
-                          <br/>
-                          <div class="row">
-                            <div class="col-xs-6">
-                              <button click.trigger="playSongOnJukebox(jbLetter,jbNumberB)" class="btn btn-info btn-lg">
-                                <p><i class="fa fa-play-circle"></i> ${selectedB}</p>
-                              </a>        
-                            </div>                          
-                          </div>
-                      </div>
-
-                      <div class="modal-footer">
+                        <div repeat.for="jbselection of mapJukeboxSelections" class="pointer">
+                              <img src="${getImagePath(jbselection)}" click.trigger="" style="margin-right: 2px;"/>
+                        </div>
                       </div>
                   </form>
               </div>
           </div>
       </div>
-
-      <!--<div class="modal fade" id="admin-jukebox-modal" tabindex="-1" role="dialog" aria-labelledby="admin-jukebox-modal">
-          <div class="modal-dialog modal-sm" role="document">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title">Handle Strip</h4>
-                  </div>
-                  <form id="admin-jukebox-form">
-                      <div class="modal-body">
-
-                          <div class="row">
-                            <div class="col-xs-6">
-                              <button click.trigger="archiveJukeboxStrip(jbselection)" class="btn btn-info btn-lg">
-                                <p><i class=""></i> Archive ${jbLetter+jbNumberA}?</p>
-                              </a>        
-                            </div>
-                          </div>
-                      </div>
-
-                      <div class="modal-footer">
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>-->
-      
+    
   </section>
 </template>
