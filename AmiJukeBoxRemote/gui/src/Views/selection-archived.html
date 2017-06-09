@@ -1,14 +1,18 @@
 <template>
   <require from="components/date-picker"></require>
+  <require from="components/filter-value-converter"></require>
   
   <section class="au-animate">
     <h2>${heading}</h2>
-      <div class="row">
-        <div class="col-xs-12">
+      <div class="row"> 
+        <div class="col-sm-8">
+          <div class="form-group">
+             <input type="text" class="form-control" name="searchFilter" value.bind="searchFilter" placeholder="search..." style="font-size:16px;margin-left: 12px;margin-bottom: 8px"></input>
+          </div>        
         </div>
-      </div> 
+      </div>     
       <div class="row" style="margin-left: 12px">
-            <div repeat.for="jbselection of mapJukeboxSelections" class="pointer">
+            <div repeat.for="jbselection of mapJukeboxSelections | filter:searchFilter:filterFunc" class="pointer">
               <!--<div hammer-press.call="handlePress($event,jbselection)">-->
                   <img src="${getImagePath(jbselection)}" click.trigger="openPlaySongDlg($event,jbselection)" style="float: left; margin-right: 2px;"/>
               <!--</div>-->

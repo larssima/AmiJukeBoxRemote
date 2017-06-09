@@ -3,6 +3,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { MapJukeboxService } from '../services/mapjukeboxservice';
 import { DialogService } from 'aurelia-dialog';
 import { ConfirmDialog } from '../Components/confirmation-dialog';
+import { FilterValueConverter } from '../Components/filter-value-converter';
 import * as toastr from 'toastr';
 
 @inject(MapJukeboxService, EventAggregator, DialogService, ConfirmDialog, ObserverLocator)
@@ -40,6 +41,14 @@ export class Welcome {
       }
     });
   }
+
+  filterFunc(searchExpression, value){
+     let itemValue = value.A1Song+" "+value.B1Song+" "+value.Artist1+" "+value.Artist2;
+     if(!searchExpression || !itemValue) return false;
+     
+     return itemValue.toUpperCase().indexOf(searchExpression.toUpperCase()) !== -1;
+  }
+
 
   handlePress($event,jbselection) {
     var _this = this;
