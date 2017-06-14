@@ -92,6 +92,7 @@ namespace AmiJukeboxRemote.webapi
         [HttpGet]
         public bool CreateAllStrips()
         {
+            CleanImagesDIrectory();
             List<JbSelectionModel> allSelections = _jbDb.GetAllSelections();
             allSelections.AddRange(_jbDb.GetAllArchivedSelections());
             foreach (var jbmodel in allSelections)
@@ -100,6 +101,16 @@ namespace AmiJukeboxRemote.webapi
                 _jbDb.UpdateImagePath(jbmodel);
             }
             return true;
+        }
+
+        private void CleanImagesDIrectory()
+        {
+            var imagepath = @"C:\Users\DiNer0-2\Documents\GitHub\AmiJukeBoxRemote\AmiJukeBoxRemote\gui\assets\images\";
+            DirectoryInfo dir = new DirectoryInfo(imagepath);
+            foreach (FileInfo file in dir.GetFiles())
+            {
+                file.Delete();
+            }
         }
 
         [Route("getalljukeboxselections")]
@@ -118,10 +129,11 @@ namespace AmiJukeboxRemote.webapi
 
         private string CreateJbStrip(JbSelectionModel jbmodel)
         {
-            var imagepath = @"C:\Users\DiNer0-2\Documents\GitHub\AmiJukeBoxRemote\AmiJukeBoxRemote\gui\assets\images\" + jbmodel.ImageStripTemplate;
+            var templatepath = @"C:\Users\DiNer0-2\Documents\GitHub\AmiJukeBoxRemote\AmiJukeBoxRemote\gui\assets\templates\" + jbmodel.ImageStripTemplate;
+            var imagepath = @"C:\Users\DiNer0-2\Documents\GitHub\AmiJukeBoxRemote\AmiJukeBoxRemote\gui\assets\images\";
             Bitmap bitmap = null;
             var bitMapImage = new
-                System.Drawing.Bitmap(System.Drawing.Image.FromFile(imagepath));
+                System.Drawing.Bitmap(System.Drawing.Image.FromFile(templatepath));
             var graphicImage = Graphics.FromImage(bitMapImage);
             graphicImage.SmoothingMode = SmoothingMode.AntiAlias;
 
@@ -160,7 +172,7 @@ namespace AmiJukeboxRemote.webapi
             var fileEndName = jbmodel.Id + (jbmodel.Archived == 0 ? "" : "_arch");
 
             //Save the new image to the response output stream.
-            var imagepathcreated = @"C:\Users\DiNer0-2\Documents\GitHub\AmiJukeBoxRemote\AmiJukeBoxRemote\gui\assets\images\" + jbmodel.ImageStripTemplate.Remove(jbmodel.ImageStripTemplate.Length-4) + "_" + fileEndName + ".png";
+            var imagepathcreated = imagepath + jbmodel.ImageStripTemplate.Remove(jbmodel.ImageStripTemplate.Length-4) + "_" + fileEndName + ".png";
             bitMapImage.Save(imagepathcreated, ImageFormat.Png);
             graphicImage.Dispose();
             bitMapImage.Dispose();

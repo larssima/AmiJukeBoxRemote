@@ -24,6 +24,7 @@ bld/
 
 # Exclude Images
 /AmiJukeBoxRemote/gui/assets/images
+/AmiJukeBoxRemote/gui/assets/templates
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -253,3 +254,4 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+*.db
