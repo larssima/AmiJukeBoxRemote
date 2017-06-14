@@ -5,17 +5,26 @@
   <section class="au-animate">
     <h2>${heading}</h2>
       <div class="row">
-        <div class="col-md-1">
-          <a class="btn btn-primary btn-responsive" click.delegate="randomsong()" style="font-size:16px;margin-left: 12px;margin-bottom: 8px">
+        <div class="col-sm-8">
+        <div class="col-sm-2">
+          <a class="btn btn-primary btn-responsive" click.delegate="randomsong()" style="font-size:16px;margin-bottom: 8px">
             <i class="fa fa-random fa-2x"></i>
-          </a>
+          <!--</a>&nbsp;&nbsp;&nbsp;&nbsp;
+          <a class="btn btn-primary btn-responsive" click.delegate="randomsong10()" style="font-size:16px;margin-bottom: 8px">
+            <i class="fa fa-random fa-2x"></i> 10
+          </a>-->
         </div>
-        <div class="col-md-2">
+        <div class="col-sm-6">
           <div class="checkbox">
                 <label style="font-size: 1.5em">
-                    <input type="checkbox" checked.bind="onlyaside" >
+                    <input type="checkbox" checked.bind="randaside" >
                     <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                    A-Sides
+                    A
+                </label>
+                <label style="font-size: 1.5em">
+                    <input type="checkbox" checked.bind="randbside" >
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    B
                 </label>
           </div>
         </div>
@@ -25,8 +34,9 @@
           </a>
         </div>-->
        </div>
+      </div>
       <div class="row"> 
-        <div class="col-md-4">
+        <div class="col-sm-8">
           <div class="form-group">
              <input type="text" class="form-control" name="searchFilter" value.bind="searchFilter" placeholder="search..." style="font-size:16px;margin-left: 12px;margin-bottom: 8px"></input>
           </div>        

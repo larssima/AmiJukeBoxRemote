@@ -1,4 +1,4 @@
-import { inject, bindable, customElement, containerless } from 'aurelia-framework';
+import { inject, bindable, customElement, containerless, observable } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { MapJukeboxService } from '../services/mapjukeboxservice';
 import { DialogService } from 'aurelia-dialog';
@@ -6,13 +6,14 @@ import { ConfirmDialog } from '../Components/confirmation-dialog';
 import * as toastr from 'toastr';
 
 
-@inject(MapJukeboxService, EventAggregator, DialogService, ConfirmDialog)
+@inject(MapJukeboxService, EventAggregator, DialogService, ConfirmDialog, observable)
 
 @containerless()
 
 export class MapEditSelections {
+@observable insert_JbNumberA;
 
-  constructor(mapJukeboxService, eventAggregator, dialogService, confirmDialog) {
+  constructor(mapJukeboxService, eventAggregator, dialogService, confirmDialog, observable) {
     this.mapJukeboxService = mapJukeboxService;
     this.dialogService = dialogService;
     this.ea = eventAggregator;
@@ -21,7 +22,8 @@ export class MapEditSelections {
     this.confirmDialog = confirmDialog;
     this.value = 'Are you sure?';
     this.insert_JbLetter = '';
-    this.insert_JbNumberA = '';
+    // this.insert_JbNumberA = '';
+    this.observable = observable;
     this.insert_JbNumberB = '';
     this.insert_JbNumeric = '';
     this.insert_A1Song = '';
@@ -34,6 +36,31 @@ export class MapEditSelections {
     this.insert_MusicCategory = '';
     this.Insert_Archived = 0;
     this.canSave = false;
+  }
+
+  isOdd(num) { return num % 2;}
+
+  insert_JbNumberAChanged(newValue, oldValue)
+  {
+    console.log(newValue,this.insert_JbLetter);
+    var numba = parseInt(newValue);
+    if(newValue<1 || newValue>19) return
+    var recordnr = -1
+    if(this.insert_JbLetter=='A') recordnr=0
+    if(this.insert_JbLetter=='B') recordnr=10
+    if(this.insert_JbLetter=='C') recordnr=20
+    if(this.insert_JbLetter=='D') recordnr=30
+    if(this.insert_JbLetter=='E') recordnr=40
+    if(this.insert_JbLetter=='F') recordnr=50
+    if(this.insert_JbLetter=='G') recordnr=60
+    if(this.insert_JbLetter=='H') recordnr=70
+    if(this.insert_JbLetter=='J') recordnr=80
+    if(this.insert_JbLetter=='K') recordnr=90
+    if(this.insert_JbLetter==-1 || !this.isOdd(numba)) return
+    var num = (numba + 1) / 2
+    recordnr = recordnr + num    
+    this.insert_JbNumberB = numba + 1;
+    this.insert_JbNumeric = recordnr;
   }
 
   activate()

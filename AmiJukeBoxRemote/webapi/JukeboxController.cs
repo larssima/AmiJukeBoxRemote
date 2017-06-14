@@ -131,12 +131,12 @@ namespace AmiJukeboxRemote.webapi
                 int opacity = 168;
                 graphicImage.DrawString(jbmodel.JbLetter + jbmodel.JbNumberA,
                     new Font("Traveling _Typewriter", 10, FontStyle.Bold),
-                    new SolidBrush(Color.FromArgb(opacity, Color.Black)), new Point(3, 31));
+                    new SolidBrush(Color.FromArgb(opacity, Color.Black)), new Point(6, 31));
 
                 // Set Jukebox Selection B
                 graphicImage.DrawString(jbmodel.JbLetter + jbmodel.JbNumberB,
                     new Font("Traveling _Typewriter", 10, FontStyle.Bold),
-                    new SolidBrush(Color.FromArgb(opacity, Color.Black)), new Point(3, 51));
+                    new SolidBrush(Color.FromArgb(opacity, Color.Black)), new Point(6, 51));
             }
 
             var textSize = TextRenderer.MeasureText(jbmodel.Artist1, new Font("Traveling _Typewriter", 12, FontStyle.Bold, GraphicsUnit.Point));
