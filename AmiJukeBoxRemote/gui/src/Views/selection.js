@@ -31,7 +31,9 @@ export class Welcome {
     this.jbLetter = "";
     this.jbNumberA = "";
     this.jbNumberB = "";
-    this.onlyaside = false;
+    this.randaside = true;
+    this.randbside = true;
+    this.selectedjb = "";
   }
   
   filterFunc(searchExpression, value){
@@ -50,9 +52,10 @@ export class Welcome {
   }
 
   handleHold($event,jbselection) {
-    var _this = this;
-    $('#admin-jukebox-modal').modal('show');
-    jbselection.SelectedForPrint = true;
+    //var _this = this;
+    this.selectedjb = jbselection;
+    //jbselection.SelectedForPrint = true;
+    return $('#admin-jukebox-modal').modal('show');
     // this.dialogService.open({ viewModel: ConfirmDialog, model: { value: "Are you sure you want to cancel record?" } }).then(function (response) {
     //   if (!response.wasCancelled) {
     //     _this.Cancel().then((activity) => {
@@ -61,13 +64,48 @@ export class Welcome {
     //   }
     // });
   }
+  
+  shuffle(array) {
+    var tmp, current, top = array.length;
+    if(top) while(--top) {
+      current = Math.floor(Math.random() * (top + 1));
+      tmp = array[current];
+      array[current] = array[top];
+      array[top] = tmp;
+    }
+    return array;
+  }
+
+  myLoop(nrofsongs) {    
+    var rnr = 0;      
+    var arr1 = Array(200).fill(0).map((e,i)=>i+1);
+    console.log("Arr1: " +arr1);
+    var arr2 = this.shuffle(arr1);
+    console.log("Arr2: " + arr2);
+    for (let i=1; i<=nrofsongs; i++) {
+      setTimeout( function timer(){
+          console.log("Song: " + i + " randomnr: " + (arr2[i-1]));
+      }, i*3000 );
+    }  
+  };   
+
+  randomsong10() {
+    this.myLoop(1);
+  }
 
   isOdd(num) { return num % 2;}
 
-  randomsong()
+  randomnr()
   {
     var count = this.mapJukeboxSelections.length*2;
     var random = Math.floor((Math.random() * count) + 1);
+    return random;
+  }
+
+  randomsong()
+  {
+    if (this.randaside==false && this.randbside==false) exit;
+    var random = this.randomnr();
     var aside = false;
     if(this.isOdd(random)){
       aside = true;
@@ -75,9 +113,13 @@ export class Welcome {
     }
     var recordnr = random/2;
     var sel = this.mapJukeboxSelections[recordnr-1];                                                           
-    if(this.onlyaside)
+    if(this.randaside && !this.randbside)
     {
         aside=true;
+    }
+    if(this.randbside && !this.randaside)
+    {
+       aside=false;
     }
     if(aside)
     {

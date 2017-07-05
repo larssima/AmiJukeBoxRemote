@@ -34,6 +34,8 @@ export class MapEditSelections {
     this.insert_Artist2 = '';
     this.insert_ImageStripTemplate = 'jukecard-lightgreen-300x100.png';
     this.insert_MusicCategory = '';
+    this.insert_DiscogsLink = '';
+    this.insert_SpotifyUri = '';
     this.Insert_Archived = 0;
     this.canSave = false;
   }
@@ -105,6 +107,8 @@ export class MapEditSelections {
                                                   this.insert_Artist2,
                                                   this.insert_ImageStripTemplate,
                                                   this.insert_MusicCategory,
+                                                  this.insert_DiscogsLink,
+                                                  this.insert_SpotifyUri,                                                  
                                                   this.Insert_Archived).then((request) => {
         this.loadData()
         this.insert_JbLetter ='';
@@ -118,6 +122,8 @@ export class MapEditSelections {
         this.insert_Artist1 ='';
         this.insert_Artist2 ='';
         this.insert_MusicCategory ='';
+        this.insert_DiscogsLink = '';
+        this.insert_SpotifyUri = '';
         this.Insert_Archived
         $('#new-selection-modal').modal('hide');
      });

@@ -20,6 +20,8 @@ namespace AmiJukeBoxRemote.Models
         public string Artist2 { get; set; }
         public string ImageStripName { get; set; }
         public string MusicCategory { get; set; }
+        public string DiscogsLink { get; set; }
+        public string SpotifyUri { get; set; }
         public int Archived { get; set; }
         public string ImageStripTemplate { get; set; }
         

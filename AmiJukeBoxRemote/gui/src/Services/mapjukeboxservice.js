@@ -95,7 +95,7 @@ export class MapJukeboxService {
         return this.baseRepo.put('amijukebox/playsongonjukebox',data)
     }
 
-    insertSelection(jbletter,jbnumberA,jbnumberB,jbnumeric,a1song,a2song,b1song,b2song,artist1,artist2,imagestriptemplate,musiccategory,archived){
+    insertSelection(jbletter,jbnumberA,jbnumberB,jbnumeric,a1song,a2song,b1song,b2song,artist1,artist2,imagestriptemplate,musiccategory,discogslink,spotifyuri,archived){
         let data = {
             JbLetter: jbletter,
             JbNumberA: jbnumberA,
@@ -109,6 +109,8 @@ export class MapJukeboxService {
             Artist2: artist2,
             ImageStripTemplate: imagestriptemplate,
             MusicCategory: musiccategory,
+            DiscogsLink: discogslink,
+            SpotifyUri: spotifyuri,
             Archived: archived
         };        
         return this.baseRepo.put('amijukebox/savestrip', data)

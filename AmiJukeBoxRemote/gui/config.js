@@ -11,6 +11,7 @@ System.config({
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.1",
     "aurelia-bootstrap": "github:tochoromero/aurelia-bootstrap@0.1.18",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0",
+    "aurelia-cookie": "npm:aurelia-cookie@1.0.10",
     "aurelia-dialog": "npm:aurelia-dialog@1.0.0-beta.3.0.1",
     "aurelia-event-aggregator": "npm:aurelia-event-aggregator@1.0.1",
     "aurelia-fetch-client": "npm:aurelia-fetch-client@1.0.1",

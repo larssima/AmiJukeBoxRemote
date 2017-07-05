@@ -53,6 +53,7 @@ namespace AmiJukeBoxRemote.Spotify
 
         public async System.Threading.Tasks.Task<bool> PlaySong(string artistName, string songTitle, string que)
         {
+            LoginToSpotify();
             var trackList = GetTrackList(artistName, songTitle, que);
             if (trackList.tracks.items.Count > 0)
             {

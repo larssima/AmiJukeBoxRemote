@@ -92,7 +92,7 @@ namespace AmiJukeboxRemote.webapi
         [HttpGet]
         public bool CreateAllStrips()
         {
-            CleanImagesDIrectory();
+            CleanImagesDirectory();
             List<JbSelectionModel> allSelections = _jbDb.GetAllSelections();
             allSelections.AddRange(_jbDb.GetAllArchivedSelections());
             foreach (var jbmodel in allSelections)
@@ -103,7 +103,7 @@ namespace AmiJukeboxRemote.webapi
             return true;
         }
 
-        private void CleanImagesDIrectory()
+        private void CleanImagesDirectory()
         {
             var imagepath = @"C:\Users\DiNer0-2\Documents\GitHub\AmiJukeBoxRemote\AmiJukeBoxRemote\gui\assets\images\";
             DirectoryInfo dir = new DirectoryInfo(imagepath);
