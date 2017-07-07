@@ -340,6 +340,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Spotify\TracksRoot.cs" />
+    <Compile Include="webapi\GenericAPIResultModel.cs" />
     <Compile Include="webapi\JukeboxController.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,30 @@
+<template>
+    <ai-dialog style="width:250px">
+        <ai-dialog-header>
+            <h2>${title}</h2>
+        </ai-dialog-header>
+
+        <ai-dialog-body>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <a target="_blank" id="discogs" style="background-color:black;color:beige;padding: 14px 25px;text-align: center;text-decoration: none;display: inline-block;width: 240px;margin-left: 15px" href="${jbselection.DiscogsLink}">Discogs</a>
+                </div>
+                <div class="form-group">
+                    <a target="_blank" id="spotify" style="background-color:green;color:beige;padding: 14px 25px;text-align: center;text-decoration: none;display: inline-block;width: 240px;margin-left: 15px" href="${jbselection.SpotifyUri}">Spotify</a>
+                </div>
+            </form>
+        </ai-dialog-body>
+
+        <ai-dialog-footer>
+            <button click.trigger="controller.ok()" class="btn btn-primary">Ok</button>
+            <button click.trigger="controller.cancel()" class="btn btn-default">Close</button>
+        </ai-dialog-footer>
+    </ai-dialog>
+
+    <style>
+        ai-dialog-overlay.active {
+            background-color: black;
+            opacity: .5;
+        }
+    </style>
+</template>

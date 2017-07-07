@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -62,9 +63,6 @@ namespace AmiJukeboxRemote.webapi
         {
             if (!_jbDb.ArchiveSelection(jbmodel.Id)) return false;
             CreateAllStrips();
-            //var alljbmodel = _jbDb.GetJbSelection(jbmodel.Id);
-            //CreateJbStrip(alljbmodel);
-            //_jbDb.UpdateImagePath(alljbmodel);
             return true;
         }
 
@@ -87,7 +85,24 @@ namespace AmiJukeboxRemote.webapi
             _jbDb.UpdateImagePath(jbmodel);
             return true;
         }
-        
+
+        [Route("updateselection")]
+        [HttpPut]
+        public GenericAPIResultModel UpdateSelectionInDb(JbSelectionModel jbmodel)
+        {
+            string errorMessage = string.Empty;
+            var ok = _jbDb.UpdateInDataBase(jbmodel);
+            if (ok)
+            {
+                CreateAllStrips();
+            }
+            else
+            {
+                errorMessage = "Could not update in database";
+            }
+            return new GenericAPIResultModel() { Success = errorMessage.Length == 0, Message = errorMessage };
+        }
+
         [Route("createstrips")]
         [HttpGet]
         public bool CreateAllStrips()

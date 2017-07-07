@@ -114,5 +114,10 @@ export class MapJukeboxService {
             Archived: archived
         };        
         return this.baseRepo.put('amijukebox/savestrip', data)
-    }    
+    }   
+
+    updateSelection(jbselectionupdate) 
+    {
+        return this.baseRepo.put('amijukebox/updateselection',jbselectionupdate).then(data => {return data;});
+    }
 }

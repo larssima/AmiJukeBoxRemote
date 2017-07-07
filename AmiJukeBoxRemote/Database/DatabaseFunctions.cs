@@ -64,8 +64,8 @@ namespace AmiJukeBoxRemote.Database
                     db.Open();
 
                     string sqlQuery = "INSERT INTO amijukebox.jbselection (jbletter,jbnumbera,jbnumberb,jbnumeric,a1song,a2song," +
-                                      "b1song,b2song,artist1,artist2,imagestripname,musiccategory,archived,imagestriptemplate) VALUES (@jbletter,@jbnumbera," +
-                                      "@jbnumberb,@jbnumeric,@a1song,@a2song,@b1song,@b2song,@artist1,@artist2,@imagestripname,@musiccategory,@archived,@imagestriptemplate)";
+                                      "b1song,b2song,artist1,artist2,imagestripname,musiccategory,archived,imagestriptemplate,discogslink,spotifyuri) VALUES (@jbletter,@jbnumbera," +
+                                      "@jbnumberb,@jbnumeric,@a1song,@a2song,@b1song,@b2song,@artist1,@artist2,@imagestripname,@musiccategory,@archived,@imagestriptemplate,@discogslink,@spotifyuri)";
                     db.Execute(sqlQuery,
                         new
                         {
@@ -182,6 +182,51 @@ namespace AmiJukeBoxRemote.Database
                             jbmodel.JbNumberA,
                             jbmodel.JbNumberB,
                             jbmodel.JbNumeric,
+                            jbmodel.Archived,
+                            jbmodel.Id
+                        });
+
+                    db.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public bool UpdateInDataBase(JbSelectionModel jbmodel)
+        {
+            try
+            {
+                using (IDbConnection db =
+                    new MySqlConnection(ConfigurationManager.ConnectionStrings["JukeboxDatabase"].ConnectionString))
+                {
+                    db.Open();
+
+                    string sqlQuery =
+                        "Update amijukebox.jbselection Set JbLetter = @jbletter, JbNumberA = @jbnumbera, JbNumberB = @jbnumberb, JbNumeric = @jbnumeric, " +
+                            "A1Song = @a1song, A2Song = @a2song, B1Song = @b1song, B2Song = @b2song, Artist1 = @artist1, Artist2 = @artist2," +
+                            "MusicCategory = @musiccategory, ImageStripTemplate = @imagestriptemplate, DiscogsLink = @discogslink, " +
+                            "SpotifyUri = @spotifyuri, Archived = @archived Where Id = @Id";
+                    db.Execute(sqlQuery,
+                        new
+                        {
+                            jbmodel.JbLetter,
+                            jbmodel.JbNumberA,
+                            jbmodel.JbNumberB,
+                            jbmodel.JbNumeric,
+                            jbmodel.A1Song,
+                            jbmodel.A2Song,
+                            jbmodel.B1Song,
+                            jbmodel.B2Song,
+                            jbmodel.Artist1,
+                            jbmodel.Artist2,
+                            jbmodel.MusicCategory,
+                            jbmodel.ImageStripTemplate,
+                            jbmodel.DiscogsLink,
+                            jbmodel.SpotifyUri,
                             jbmodel.Archived,
                             jbmodel.Id
                         });

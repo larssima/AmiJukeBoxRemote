@@ -3,6 +3,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { MapJukeboxService } from '../services/mapjukeboxservice';
 import { DialogService } from 'aurelia-dialog';
 import { ConfirmDialog } from '../Components/confirmation-dialog';
+import {EditJbSelection} from './edit-selections-dlg';
 import * as toastr from 'toastr';
 
 
@@ -83,6 +84,23 @@ export class MapEditSelections {
     return this.mapJukeboxService.getAllJukeboxSelections().then(data => {
       this.mapJukeboxSelections = data;
       });
+  }
+
+  editSelection(jbselectionToEdit) {
+        var editJbSelection = Object.assign({}, jbselectionToEdit);
+
+        this.dialogService.open({viewModel: EditJbSelection, model: { jbselection: editJbSelection, title: 'Edit Selection' } }).then(response => {
+            if(!response.wasCancelled){
+                this.mapJukeboxService.updateSelection(response.output).then((result)=>{
+                    if (result.success) {
+                        toastr.success('Selection updated.');
+                    } else {
+                        toastr.error(result.message);
+                    }
+                    this.loadData();
+                });
+            }
+        });
   }
 
   archiveSelection(jbselection) {

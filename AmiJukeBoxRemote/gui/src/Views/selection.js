@@ -3,6 +3,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 import { MapJukeboxService } from '../services/mapjukeboxservice';
 import { DialogService } from 'aurelia-dialog';
 import { ConfirmDialog } from '../Components/confirmation-dialog';
+import { SelectionInfo } from './selections-info-dlg';
 import { FilterValueConverter } from '../Components/filter-value-converter';
 import * as toastr from 'toastr';
 
@@ -51,11 +52,23 @@ export class Welcome {
     $('#play-jukebox-modal').modal('show');
   }
 
+  showSelectionInfo(jbselectionInfo) {
+        var infoSelection = Object.assign({}, jbselectionInfo);
+
+        this.dialogService.open({viewModel: SelectionInfo, model: { jbselection: infoSelection, title: 'Selection info' } }).then(response => {
+                return response.wasCancelled;
+            });
+  }
+
+
   handleHold($event,jbselection) {
     //var _this = this;
     this.selectedjb = jbselection;
     //jbselection.SelectedForPrint = true;
-    return $('#admin-jukebox-modal').modal('show');
+    //return $('#admin-jukebox-modal').modal('show');
+    this.showSelectionInfo(this.selectedjb).then(response => {
+        return response.wasCancelled;
+    });
     // this.dialogService.open({ viewModel: ConfirmDialog, model: { value: "Are you sure you want to cancel record?" } }).then(function (response) {
     //   if (!response.wasCancelled) {
     //     _this.Cancel().then((activity) => {

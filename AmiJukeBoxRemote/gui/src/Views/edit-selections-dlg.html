@@ -1,0 +1,110 @@
+<template>
+    <ai-dialog style="width:700px">
+        <ai-dialog-header>
+            <h2>${title}</h2>
+        </ai-dialog-header>
+
+        <ai-dialog-body>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="txtJbLetter" class="col-sm-2 control-label">JbLetter</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtJbLetter" class="form-control" value.bind="jbselection.JbLetter">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txtJbNumberA" class="col-sm-2 control-label">JbNumberA</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtJbNumberA" class="form-control" value.bind="jbselection.JbNumberA">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="txtJbNumberB" class="col-sm-2 control-label">JbNumberB</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtJbNumberB" class="form-control" value.bind="jbselection.JbNumberB">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtJbNumeric" class="col-sm-2 control-label">JbNumeric</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtJbNumeric" class="form-control" value.bind="jbselection.JbNumeric">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtA1Song" class="col-sm-2 control-label">A1Song</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtA1Song" class="form-control" value.bind="jbselection.A1Song">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtA2Song" class="col-sm-2 control-label">A2Song</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtA2Song" class="form-control" value.bind="jbselection.A2Song">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtB1Song" class="col-sm-2 control-label">B1Song</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtB1Song" class="form-control" value.bind="jbselection.B1Song">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtB2Song" class="col-sm-2 control-label">B2Song</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtB2Song" class="form-control" value.bind="jbselection.B2Song">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtArtist1" class="col-sm-2 control-label">Artist1</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtArtist1" class="form-control" value.bind="jbselection.Artist1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtArtist2" class="col-sm-2 control-label">Artist2</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtArtist2" class="form-control" value.bind="jbselection.Artist2">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtDiscogsLink" class="col-sm-2 control-label">DiscogsLink</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtDiscogsLink" class="form-control" value.bind="jbselection.DiscogsLink">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtSpotifyLink" class="col-sm-2 control-label">SpotifyLink</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtSpotifyLink" class="form-control" value.bind="jbselection.SpotifyUri">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtImageStripTemplate" class="col-sm-2 control-label">ImageStripTemplate</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtImageStripTemplate" class="form-control" value.bind="jbselection.ImageStripTemplate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtMusicCategory" class="col-sm-2 control-label">MusicCategory</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="txtMusicCategory" class="form-control" value.bind="jbselection.MusicCategory">
+                    </div>
+                </div>
+            </form>
+        </ai-dialog-body>
+
+        <ai-dialog-footer>
+            <button click.trigger="controller.cancel()" class="btn btn-default">Cancel</button>
+            <button click.trigger="controller.ok(jbselection)" class="btn btn-primary">Save</button>
+        </ai-dialog-footer>
+    </ai-dialog>
+
+    <style>
+        ai-dialog-overlay.active {
+            background-color: black;
+            opacity: .5;
+        }
+    </style>
+</template>

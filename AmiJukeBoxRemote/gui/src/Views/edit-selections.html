@@ -36,7 +36,9 @@
                                 <th></th>
                                 <th>Music Cat</th>
                                 <th></th>
-                                <th>Archived</th>
+                                <th>Discogs Link</th>
+                                <th></th>
+                                <th>Spotify Link</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -64,7 +66,11 @@
                                 <td></td>
                                 <td>${jbselection.MusicCategory}</td>
                                 <td></td>
-                                <td>${jbselection.Archived}</td>
+                                <td>${jbselection.DiscogsLink}</td>
+                                <td></td>
+                                <td>${jbselection.SpotifyUri}</td>
+                                <td><button type="button" class="btn btn-xs" style="float: right;background-color: mistyrose"
+                                        click.trigger="editSelection(jbselection)">Edit</button></td>
                                 <td><button type="button" class="btn btn-xs" style="float: right;background-color: mistyrose"
                                         click.trigger="deleteSelection(jbselection)">Delete</button></td>
                                 <td><button type="button" class="btn btn-xs" style="float: right;background-color: mistyrose"
