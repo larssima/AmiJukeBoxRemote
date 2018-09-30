@@ -54,8 +54,9 @@ export class Welcome {
 
   showSelectionInfo(jbselectionInfo) {
         var infoSelection = Object.assign({}, jbselectionInfo);
+        var _title = infoSelection.Artist1 + "-" + infoSelection.A1Song;
 
-        this.dialogService.open({viewModel: SelectionInfo, model: { jbselection: infoSelection, title: 'Selection info' } }).then(response => {
+        this.dialogService.open({viewModel: SelectionInfo, model: { jbselection: infoSelection, title: _title }, lock: true }).whenClosed(response => {
                 return response.wasCancelled;
             });
   }
@@ -89,22 +90,22 @@ export class Welcome {
     return array;
   }
 
-  myLoop(nrofsongs) {    
-    var rnr = 0;      
-    var arr1 = Array(200).fill(0).map((e,i)=>i+1);
-    console.log("Arr1: " +arr1);
-    var arr2 = this.shuffle(arr1);
-    console.log("Arr2: " + arr2);
-    for (let i=1; i<=nrofsongs; i++) {
-      setTimeout( function timer(){
-          console.log("Song: " + i + " randomnr: " + (arr2[i-1]));
-      }, i*3000 );
-    }  
-  };   
+  // myLoop(nrofsongs) {    
+  //   var rnr = 0;      
+  //   var arr1 = Array(200).fill(0).map((e,i)=>i+1);
+  //   console.log("Arr1: " +arr1);
+  //   var arr2 = this.shuffle(arr1);
+  //   console.log("Arr2: " + arr2);
+  //   for (let i=1; i<=nrofsongs; i++) {
+  //     setTimeout( function timer(){
+  //         console.log("Song: " + i + " randomnr: " + (arr2[i-1]));
+  //     }, i*3000 );
+  //   }  
+  // };   
 
-  randomsong10() {
-    this.myLoop(1);
-  }
+  // randomsong10() {
+  //   this.myLoop(1);
+  // }
 
   isOdd(num) { return num % 2;}
 
@@ -144,6 +145,22 @@ export class Welcome {
        this.playSongOnJukebox(sel.JbLetter,sel.JbNumberB);
        toastr.success(sel.B1Song+" ["+sel.JbLetter+sel.JbNumberB+"] selected!");
     }
+  }
+
+  playrandomsongs(nrofsongs)
+  {
+    for (let i=1; i<=nrofsongs; i++) {
+      this.randomsong();
+      this.waittime(4000);
+    }      
+  }
+
+  waittime(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+      end = new Date().getTime();
+   }
   }
 
   openPlaySongDlg($event,jbselection) {

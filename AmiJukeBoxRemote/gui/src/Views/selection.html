@@ -5,16 +5,20 @@
   <section class="au-animate">
     <h2>${heading}</h2>
       <div class="row">
-        <div class="col-sm-8">
-        <div class="col-sm-2">
-          <a class="btn btn-primary btn-responsive" click.delegate="randomsong()" style="font-size:16px;margin-bottom: 8px">
-            <i class="fa fa-random fa-2x"></i>
-          <!--</a>&nbsp;&nbsp;&nbsp;&nbsp;
-          <a class="btn btn-primary btn-responsive" click.delegate="randomsong10()" style="font-size:16px;margin-bottom: 8px">
-            <i class="fa fa-random fa-2x"></i> 10
-          </a>-->
+        <div class="col-sm-4">
+          <div class="col-sm-3">
+              <a class="btn btn-primary btn-responsive" click.delegate="randomsong()" style="font-size:16px;margin-bottom: 8px">
+                <i class="fa fa-random fa-2x"></i>
+          </div>
+          <div class="col-sm-3">
+              <a class="btn btn-primary btn-responsive" click.delegate="playrandomsongs(5)" style="font-size:26px;margin-bottom: 8px">
+              <i>5</i>
+          </div>
+          <div class="col-sm-3">
+            <a class="btn btn-primary btn-responsive" click.delegate="playrandomsongs(10)" style="font-size:26px;margin-bottom: 8px">
+            <i>10</i>
         </div>
-        <div class="col-sm-6">
+    <!-- <div class="col-sm-6"> -->
           <div class="checkbox">
                 <label style="font-size: 1.5em">
                     <input type="checkbox" checked.bind="randaside" >
@@ -26,7 +30,7 @@
                     <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                     B
                 </label>
-          </div>
+          <!-- </div> -->
         </div>
         <!--<div class="col-md-1">
           <a class="btn btn-primary btn-responsive" click.delegate="printdlg()" style="font-size:16px;margin-bottom: 8px">

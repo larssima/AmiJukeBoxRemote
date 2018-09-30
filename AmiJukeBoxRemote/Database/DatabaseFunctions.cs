@@ -82,7 +82,9 @@ namespace AmiJukeBoxRemote.Database
                             jbmodel.ImageStripName,
                             jbmodel.MusicCategory,
                             jbmodel.Archived,
-                            jbmodel.ImageStripTemplate
+                            jbmodel.ImageStripTemplate,
+                            jbmodel.DiscogsLink,
+                            jbmodel.SpotifyUri
                         });
 
                     id = db.Query<int>("SELECT CAST(LAST_INSERT_ID() AS UNSIGNED INTEGER);").Single();

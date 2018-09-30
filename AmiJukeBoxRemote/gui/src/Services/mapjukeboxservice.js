@@ -120,4 +120,12 @@ export class MapJukeboxService {
     {
         return this.baseRepo.put('amijukebox/updateselection',jbselectionupdate).then(data => {return data;});
     }
+
+    turnonoff(onoff)
+    {
+        let data = {
+            OnOff: onoff
+        }
+        return this.baseRepo.put('amijukebox/turnonoff',data)
+    }
 }

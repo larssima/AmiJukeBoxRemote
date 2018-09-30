@@ -4,9 +4,28 @@
   <section class="au-animate">
     <h2>${heading}</h2>
       <div class="row">
-        <div class="col-xs-12">
-        <button class="btn btn-primary btn-responsive" click.delegate="createstrips()">Create Strips</button>
-        <button class="btn btn-primary btn-responsive" data-toggle="button" click.delegate="cancelRecord()">Cancel record playing</button>
+        <div class="col-sm-1">
+          <a class="btn btn-primary btn-responsive" click.delegate="turnon()" style="font-size:24px;margin-bottom: 8px">
+            On
+        </div>
+      </div>        
+      <div class="row">
+          <div class="col-sm-1">
+            <a class="btn btn-primary btn-responsive" click.delegate="turnoff()" style="font-size:24px;margin-bottom: 8px">
+              Off
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-1">
+          <div class="btn btn-primary btn-responsive" click.delegate="createstrips()" style="font-size:24px;margin-bottom: 8px">Create Strips</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-1">
+          <div class="btn btn-primary btn-responsive" data-toggle="button" click.delegate="cancelRecord()" style="font-size:24px;margin-bottom: 8px">Cancel record playing</div>
+        </div>
       </div> 
   </section>
 </template>
+
+

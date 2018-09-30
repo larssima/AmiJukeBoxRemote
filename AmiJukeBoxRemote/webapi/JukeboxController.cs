@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Net;
 using System.Web.Http;
 using System.Windows.Forms;
 using AmiJukeBoxRemote.Database;
 using AmiJukeBoxRemote.Models;
 using AmiJukeBoxRemote.Mqtt;
 using AmiJukeBoxRemote.Spotify;
+using RestSharp;
+using RestSharp.Deserializers;
+using RestSharp.Serializers;
 
 namespace AmiJukeboxRemote.webapi
 {
@@ -132,14 +137,61 @@ namespace AmiJukeboxRemote.webapi
         [HttpGet]
         public List<JbSelectionModel> GetAllJukeboxSelectíons()
         {
+            var token = GetTokenRest();
+            TurnJukeboxOnOff(1,token);
             return _jbDb.GetAllSelections();
         }
+
+        [Route("turnonoff")]
+        [HttpPut]
+        public void TurnOnOff(OnOffObj onoff)
+        {
+            TurnJukeboxOnOff(onoff.OnOff, GetTokenRest());
+        }
+
+
 
         [Route("getallarchivedjukeboxselections")]
         [HttpGet]
         public List<JbSelectionModel> GetAllArchivedJukeboxSelectíons()
         {
             return _jbDb.GetAllArchivedSelections();
+        }
+
+        public class TokenObject 
+        {
+            public string regtime { get; set; }
+            public string email { get; set; }
+            public string token { get; set; }
+        }
+
+
+        public string GetTokenRest()
+        {
+            var client = new RestClient("https://wap.tplinkcloud.com");
+            var request = new RestRequest(Method.POST);
+//            request.AddHeader("postman-token", "9f021650-0a23-6424-aa3b-24222f4c7e15");
+            request.AddHeader("cache-control", "no-cache");
+            request.AddHeader("content-type", "application/json");
+            request.AddHeader("Accept", "text/plain");
+            request.AddParameter("application/json", "{\r\n \"method\": \"login\",\r\n \"params\": {\r\n \"appType\": \"Kasa_Android\",\r\n \"cloudUserName\": \"diner0.2000@gmail.com\",\r\n \"cloudPassword\": \"cZO*dt57d&J8\",\r\n \"terminalUUID\": \"f1fad613-9f2b-4e67-ba48-716e3709c136\"\r\n }\r\n}", ParameterType.RequestBody);
+            IRestResponse response = client.Execute(request);
+            var tokenstart = response.Content.IndexOf("token\":\"");
+            var token = response.Content.Substring(tokenstart + 8, 32);
+            return token;
+        }
+
+        public void TurnJukeboxOnOff(int onOff,string tokenstr)
+        {
+            var client = new RestClient("https://eu-wap.tplinkcloud.com?token=" + tokenstr);
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("cache-control", "no-cache");
+            request.AddHeader("content-type", "application/json");
+            request.AddHeader("Accept", "text/plain");
+            var body = $"{{\r\n \"method\":\"passthrough\",\r\n \"params\":{{\r\n \"deviceId\":\"8006A2F2745745F6D47E153BE694623918E1044C\",\r\n \"requestData\":\"{{\\\"system\\\":{{\\\"set_relay_state\\\":{{\\\"state\\\":{onOff}}}}}}}\"\r\n }}\r\n}}";
+            request.AddParameter("application/json", body, ParameterType.RequestBody);
+            var response = client.Execute(request);
+            var message = response.Content;
         }
 
         private string CreateJbStrip(JbSelectionModel jbmodel)
@@ -207,6 +259,11 @@ namespace AmiJukeboxRemote.webapi
         {
             public string JbLetter { get; set; }
             public string JbNumber { get; set; }
+        }
+
+        public class OnOffObj
+        {
+            public int OnOff { get; set; }
         }
     }
 }

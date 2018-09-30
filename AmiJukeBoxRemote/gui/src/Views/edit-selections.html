@@ -24,16 +24,16 @@
                                 <th></th>
                                 <th>Song A1</th>
                                 <th></th>
-                                <th>Song A2</th>
-                                <th></th>
+                                <!--<th>Song A2</th>
+                                <th></th>-->
                                 <th>Song B1</th>
                                 <th></th>
-                                <th>Song B2</th>
-                                <th></th>
+                                <!--<th>Song B2</th>
+                                <th></th>-->
                                 <th>Artist 1</th>
                                 <th></th>
-                                <th>Artist 2</th>
-                                <th></th>
+                                <!--<th>Artist 2</th>
+                                <th></th>-->
                                 <th>Music Cat</th>
                                 <th></th>
                                 <th>Discogs Link</th>
@@ -54,21 +54,21 @@
                                 <td></td>
                                 <td>${jbselection.A1Song}</td>
                                 <td></td>
-                                <td>${jbselection.A2Song}</td>
-                                <td></td>
+                                <!--<td>${jbselection.A2Song}</td>
+                                <td></td>-->
                                 <td>${jbselection.B1Song}</td>
                                 <td></td>
-                                <td>${jbselection.B2Song}</td>
-                                <td></td>
+                                <!--<td>${jbselection.B2Song}</td>
+                                <td></td>-->
                                 <td>${jbselection.Artist1}</td>
                                 <td></td>
-                                <td>${jbselection.Artist2}</td>
-                                <td></td>
+                                <!--<td>${jbselection.Artist2}</td>
+                                <td></td>-->
                                 <td>${jbselection.MusicCategory}</td>
                                 <td></td>
-                                <td>${jbselection.DiscogsLink}</td>
+                                <td>${jbselection.DiscogsLink.length>0 ? "O":""}</td>
                                 <td></td>
-                                <td>${jbselection.SpotifyUri}</td>
+                                <td>${jbselection.SpotifyUri.length>0 ? "►":""}</td>
                                 <td><button type="button" class="btn btn-xs" style="float: right;background-color: mistyrose"
                                         click.trigger="editSelection(jbselection)">Edit</button></td>
                                 <td><button type="button" class="btn btn-xs" style="float: right;background-color: mistyrose"

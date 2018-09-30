@@ -26,6 +26,22 @@ export class Welcome {
   {
     return this.mapJukeboxService.cancelRecord();
   }
+
+  randomrecords()
+  {
+    
+  }
+
+  turnon()
+  {
+    this.mapJukeboxService.turnonoff(1);
+  }
+
+  turnoff()
+  {
+    this.mapJukeboxService.turnonoff(0);
+  }
+  
   
   handleHold($event) {
     var _this = this;

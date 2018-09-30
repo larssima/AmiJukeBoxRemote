@@ -1,7 +1,7 @@
 <template>
     <ai-dialog style="width:250px">
         <ai-dialog-header>
-            <h2>${title}</h2>
+            <h3>${title}</h3>
         </ai-dialog-header>
 
         <ai-dialog-body>
@@ -16,7 +16,6 @@
         </ai-dialog-body>
 
         <ai-dialog-footer>
-            <button click.trigger="controller.ok()" class="btn btn-primary">Ok</button>
             <button click.trigger="controller.cancel()" class="btn btn-default">Close</button>
         </ai-dialog-footer>
     </ai-dialog>
