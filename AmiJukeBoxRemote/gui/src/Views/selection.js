@@ -150,8 +150,7 @@ export class Welcome {
   playrandomsongs(nrofsongs)
   {
     for (let i=1; i<=nrofsongs; i++) {
-      this.randomsong();
-      this.waittime(4000);
+      this.randomsong()
     }      
   }
 

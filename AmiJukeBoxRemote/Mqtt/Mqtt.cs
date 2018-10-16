@@ -31,6 +31,7 @@ namespace AmiJukeBoxRemote.Mqtt
             mqttClient.Connect(clientId);
             mqttClient.Publish("amiJukebox", Encoding.UTF8.GetBytes(jbModel.JbLetter+jbModel.JbNumber),
                 MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+            //System.Threading.Thread.Sleep(3000);
         }
     }
 }
