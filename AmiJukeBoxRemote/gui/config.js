@@ -6,6 +6,7 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+
   map: {
     "CodeSeven/toastr": "github:CodeSeven/toastr@2.1.3",
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.1",
