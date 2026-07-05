@@ -1,4 +1,3 @@
-using System.Net;
 using System.Text;
 using AmiJukeBoxService.Models;
 using uPLibrary.Networking.M2Mqtt;
@@ -6,9 +5,11 @@ using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace AmiJukeBoxService.Mqtt;
 
-public class MqttService
+public class MqttService : IDisposable
 {
     private readonly string _raspberryIp;
+    private readonly object _lock = new();
+    private MqttClient? _client;
 
     public MqttService(IConfiguration config)
     {
@@ -27,9 +28,27 @@ public class MqttService
 
     private void Publish(string message)
     {
-        var client = new MqttClient(IPAddress.Parse(_raspberryIp));
-        client.Connect(Guid.NewGuid().ToString());
-        client.Publish("amiJukebox", Encoding.UTF8.GetBytes(message),
-            MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+        lock (_lock)
+        {
+            var client = GetConnectedClient();
+            client.Publish("amiJukebox", Encoding.UTF8.GetBytes(message),
+                MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+        }
+    }
+
+    private MqttClient GetConnectedClient()
+    {
+        if (_client is not { IsConnected: true })
+        {
+            _client = new MqttClient(_raspberryIp);
+            _client.Connect(Guid.NewGuid().ToString());
+        }
+        return _client;
+    }
+
+    public void Dispose()
+    {
+        if (_client is { IsConnected: true })
+            _client.Disconnect();
     }
 }
