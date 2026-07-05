@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using AmiJukeBoxService.Database;
@@ -16,13 +17,15 @@ public class JukeboxController : ControllerBase
     private readonly MqttService _mqtt;
     private readonly ImageStripService _images;
     private readonly IConfiguration _config;
+    private readonly ILogger<JukeboxController> _logger;
 
-    public JukeboxController(DatabaseFunctions db, MqttService mqtt, ImageStripService images, IConfiguration config)
+    public JukeboxController(DatabaseFunctions db, MqttService mqtt, ImageStripService images, IConfiguration config, ILogger<JukeboxController> logger)
     {
         _db = db;
         _mqtt = mqtt;
         _images = images;
         _config = config;
+        _logger = logger;
     }
 
     [HttpGet("cancel")]
@@ -137,7 +140,10 @@ public class JukeboxController : ControllerBase
             });
             client.Execute(request);
         }
-        catch { /* non-critical */ }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to set TP-Link smart plug state to {OnOff}", onOff);
+        }
     }
 
     private string GetTpLinkToken()
@@ -163,10 +169,39 @@ public class JukeboxController : ControllerBase
                 }
             });
             var response = client.Execute(request);
-            var content = response.Content ?? "";
-            var idx = content.IndexOf("token\":\"");
-            return idx >= 0 ? content.Substring(idx + 8, 32) : "";
+            if (response.Content is null) return "";
+
+            var login = System.Text.Json.JsonSerializer.Deserialize<TpLinkLoginResponse>(response.Content);
+            if (login is null || login.ErrorCode != 0 || login.Result?.Token is null)
+            {
+                _logger.LogWarning("TP-Link login failed: error_code={ErrorCode}, msg={Message}", login?.ErrorCode, login?.Msg);
+                return "";
+            }
+
+            return login.Result.Token;
         }
-        catch { return ""; }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to obtain TP-Link cloud token");
+            return "";
+        }
+    }
+
+    private sealed class TpLinkLoginResponse
+    {
+        [JsonPropertyName("error_code")]
+        public int ErrorCode { get; set; }
+
+        [JsonPropertyName("msg")]
+        public string? Msg { get; set; }
+
+        [JsonPropertyName("result")]
+        public TpLinkLoginResult? Result { get; set; }
+    }
+
+    private sealed class TpLinkLoginResult
+    {
+        [JsonPropertyName("token")]
+        public string? Token { get; set; }
     }
 }

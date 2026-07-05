@@ -8,10 +8,12 @@ namespace AmiJukeBoxService.Database;
 public class DatabaseFunctions
 {
     private readonly string _connStr;
+    private readonly ILogger<DatabaseFunctions> _logger;
 
-    public DatabaseFunctions(IConfiguration config)
+    public DatabaseFunctions(IConfiguration config, ILogger<DatabaseFunctions> logger)
     {
         _connStr = config.GetConnectionString("JukeboxDatabase")!;
+        _logger = logger;
     }
 
     public List<JbSelectionModel> GetAllSelections()
@@ -42,7 +44,11 @@ public class DatabaseFunctions
             m.Id = id;
             return id;
         }
-        catch { return -1; }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to save selection {JbLetter}{JbNumberA}/{JbNumberB} to database", m.JbLetter, m.JbNumberA, m.JbNumberB);
+            return -1;
+        }
     }
 
     public bool UpdateImagePath(JbSelectionModel m)
@@ -53,7 +59,11 @@ public class DatabaseFunctions
             db.Execute("UPDATE amijukebox.jbselection SET ImageStripName=@ImageStripName WHERE Id=@Id", m);
             return true;
         }
-        catch { return false; }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to update image path for selection {Id}", m.Id);
+            return false;
+        }
     }
 
     public bool ArchiveSelection(int id)
@@ -64,7 +74,11 @@ public class DatabaseFunctions
             db.Execute("UPDATE amijukebox.jbselection SET Archived=1 WHERE Id=@Id", new { Id = id });
             return true;
         }
-        catch { return false; }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to archive selection {Id}", id);
+            return false;
+        }
     }
 
     public bool ReinstateSelection(JbSelectionModel m)
@@ -77,7 +91,11 @@ public class DatabaseFunctions
                 "JbNumeric=@JbNumeric,Archived=@Archived WHERE Id=@Id", m);
             return true;
         }
-        catch { return false; }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to reinstate selection {Id}", m.Id);
+            return false;
+        }
     }
 
     public bool UpdateInDataBase(JbSelectionModel m)
@@ -92,6 +110,10 @@ public class DatabaseFunctions
                 "DiscogsLink=@DiscogsLink,SpotifyUri=@SpotifyUri,Archived=@Archived WHERE Id=@Id", m);
             return true;
         }
-        catch { return false; }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to update selection {Id}", m.Id);
+            return false;
+        }
     }
 }
