@@ -8,7 +8,6 @@ export class BaseRepo {
         http.configure(config => {
             config
                 .withDefaults({
-                    credentials: 'include', //Oklart om denna har nån funktion Valid values; omit, same-origin and include
                     headers: {
                         //'Content-Type': 'application/json',
                         'Accept': 'application/json'

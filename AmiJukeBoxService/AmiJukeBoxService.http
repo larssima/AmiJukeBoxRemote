@@ -1,0 +1,6 @@
+@AmiJukeBoxService_HostAddress = http://localhost:5133
+
+GET {{AmiJukeBoxService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

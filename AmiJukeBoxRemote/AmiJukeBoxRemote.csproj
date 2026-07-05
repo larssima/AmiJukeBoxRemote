@@ -364,6 +364,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="ConnectionStrings.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />

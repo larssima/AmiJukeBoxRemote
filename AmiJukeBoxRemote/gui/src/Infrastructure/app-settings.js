@@ -2,13 +2,8 @@ export class AppSettings {
     volUrl = '';
 
     constructor() {
-        if (window.location.hostname === 'localhost') {
-            // Config for development
-            this.baseUrl = 'http://localhost/AmiJukeBoxRemote/';
-        } else {
-            // Config for test and prod
-            this.baseUrl = '/AmiJukeBoxRemote/';
-        }
+        // API runs as a standalone service on port 8083
+        this.baseUrl = `${window.location.protocol}//${window.location.hostname}:8083/`;
         this.api = this.baseUrl + 'api/';
     }
 }
